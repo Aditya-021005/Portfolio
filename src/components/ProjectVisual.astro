@@ -1,0 +1,78 @@
+---
+/**
+ * Card / hero visual for a project.
+ * Renders `cover` when present, otherwise a quiet generated placeholder —
+ * a technical grid with a faint category glyph, so the site reads as
+ * finished before any photography exists. Deliberately low-contrast:
+ * it should recede behind the typography, not compete with it.
+ */
+import Icon from './Icon.astro';
+import { hueFor, categoryIcon } from '../lib/projects';
+
+interface Props {
+  cover?: string;
+  title: string;
+  slug: string;
+  category: string;
+  accent?: string;
+  hero?: boolean;
+  class?: string;
+  loading?: 'lazy' | 'eager';
+}
+
+const {
+  cover,
+  title,
+  slug,
+  category,
+  accent,
+  hero = false,
+  class: className = '',
+  loading = 'lazy',
+} = Astro.props;
+
+const hue = hueFor(slug);
+// Heavily desaturated — a tint, not a gradient light show.
+const tint = accent ?? `hsl(${hue} 24% 42%)`;
+const icon = categoryIcon[category] ?? 'spark';
+---
+
+<div class:list={['relative overflow-hidden bg-ink', className]}>
+  {
+    cover ? (
+      <img
+        src={cover}
+        alt={title}
+        loading={loading}
+        decoding="async"
+        class="size-full object-cover transition-transform duration-[1.4s] [transition-timing-function:var(--ease-out-expo)] group-hover:scale-[1.03]"
+      />
+    ) : (
+      <div
+        class="relative size-full transition-transform duration-[1.4s] [transition-timing-function:var(--ease-out-expo)] group-hover:scale-[1.02]"
+        style={`background: linear-gradient(150deg, ${tint}1f, #0a0c0f 62%)`}
+        aria-hidden="true"
+      >
+        <div
+          class="absolute inset-0"
+          style={`background-image:
+            linear-gradient(to right, rgb(255 255 255 / 0.05) 1px, transparent 1px),
+            linear-gradient(to bottom, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+            background-size:${hero ? '3.5rem 3.5rem' : '2.25rem 2.25rem'}`}
+        />
+        <div class="absolute inset-0 grid place-items-center">
+          <Icon
+            name={icon}
+            class:list={[hero ? 'size-24' : 'size-14', 'text-fg opacity-[0.13]']}
+            strokeWidth={0.6}
+          />
+        </div>
+      </div>
+    )
+  }
+
+  <div
+    class="pointer-events-none absolute inset-0 bg-gradient-to-t from-void/80 via-transparent to-transparent"
+  >
+  </div>
+</div>

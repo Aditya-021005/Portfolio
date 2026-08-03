@@ -1,0 +1,125 @@
+---
+/**
+ * Video block supporting self-hosted MP4, YouTube and Vimeo.
+ * Embeds use a click-to-load facade — no third-party requests until played.
+ *
+ *   videos:
+ *     - { type: mp4,     src: /videos/rover.mp4, title: "Field test", poster: /images/rover/still.jpg }
+ *     - { type: youtube, src: dQw4w9WgXcQ,       title: "Flight log" }
+ *     - { type: vimeo,   src: 76979871,          title: "Bench demo" }
+ */
+import Icon from './Icon.astro';
+
+interface Video {
+  type: 'mp4' | 'youtube' | 'vimeo';
+  src: string;
+  title: string;
+  poster?: string;
+}
+
+interface Props {
+  videos: Video[];
+}
+
+const { videos } = Astro.props;
+
+/** Accepts a bare ID or any common share/watch URL. */
+function idFrom(type: Video['type'], src: string): string {
+  if (!/[/.]/.test(src)) return src;
+  const yt = src.match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{6,})/);
+  if (type === 'youtube' && yt) return yt[1];
+  const vm = src.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+  if (type === 'vimeo' && vm) return vm[1];
+  return src;
+}
+
+const prepared = videos.map((v) => {
+  const id = idFrom(v.type, v.src);
+  return {
+    ...v,
+    id,
+    embed:
+      v.type === 'youtube'
+        ? `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`
+        : v.type === 'vimeo'
+          ? `https://player.vimeo.com/video/${id}?autoplay=1`
+          : '',
+    poster:
+      v.poster ??
+      (v.type === 'youtube' ? `https://i.ytimg.com/vi/${id}/maxresdefault.jpg` : undefined),
+  };
+});
+---
+
+{
+  prepared.length > 0 && (
+    <div class="grid gap-6 lg:grid-cols-2">
+      {prepared.map((v, i) => (
+        <figure
+          class="glass overflow-hidden rounded-[var(--radius-card)]"
+          data-reveal
+          style={`--reveal-delay:${Math.min(i, 3) * 60}ms`}
+        >
+          {v.type === 'mp4' ? (
+            <video
+              controls
+              preload="metadata"
+              poster={v.poster}
+              class="aspect-video w-full bg-ink object-cover"
+            >
+              <source src={v.src} type="video/mp4" />
+              Your browser does not support embedded video.
+            </video>
+          ) : (
+            <div class="group relative aspect-video w-full bg-ink" data-embed={v.embed}>
+              {v.poster ? (
+                <img
+                  src={v.poster}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                  class="size-full object-cover opacity-75 transition-opacity duration-500 group-hover:opacity-100"
+                />
+              ) : (
+                <div class="size-full bg-[radial-gradient(ellipse_at_center,rgba(34,229,255,0.14),transparent_65%)]" />
+              )}
+
+              <button
+                type="button"
+                class="absolute inset-0 grid place-items-center"
+                data-play
+                aria-label={`Play: ${v.title}`}
+              >
+                <span class="grid size-[4.5rem] place-items-center rounded-full border border-[var(--line-strong)] bg-void/55 text-cyan-soft backdrop-blur-md transition-all duration-500 group-hover:scale-110 group-hover:border-cyan-neon/60 group-hover:text-cyan-neon">
+                  <Icon name="play" class="size-6 translate-x-0.5" />
+                </span>
+              </button>
+            </div>
+          )}
+
+          <figcaption class="flex items-center gap-3 border-t border-[var(--line)] px-5 py-4">
+            <Icon name="video" class="size-4 shrink-0 text-cyan-dim" />
+            <span class="text-sm text-fg-muted">{v.title}</span>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  )
+}
+
+<script is:inline>
+  document.querySelectorAll('[data-embed] [data-play]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const host = btn.closest('[data-embed]');
+      if (!host) return;
+      const iframe = document.createElement('iframe');
+      iframe.src = host.dataset.embed;
+      iframe.title = btn.getAttribute('aria-label') || 'Video';
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture';
+      iframe.allowFullscreen = true;
+      iframe.className = 'absolute inset-0 size-full';
+      iframe.setAttribute('frameborder', '0');
+      host.replaceChildren(iframe);
+    });
+  });
+</script>

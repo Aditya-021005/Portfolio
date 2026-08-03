@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#08090b"/>
+
+  <g stroke="#ffffff" stroke-opacity="0.05">
+    <line x1="0" y1="0" x2="0" y2="630"/><line x1="96" y1="0" x2="96" y2="630"/><line x1="192" y1="0" x2="192" y2="630"/><line x1="288" y1="0" x2="288" y2="630"/><line x1="384" y1="0" x2="384" y2="630"/><line x1="480" y1="0" x2="480" y2="630"/><line x1="576" y1="0" x2="576" y2="630"/><line x1="672" y1="0" x2="672" y2="630"/><line x1="768" y1="0" x2="768" y2="630"/><line x1="864" y1="0" x2="864" y2="630"/><line x1="960" y1="0" x2="960" y2="630"/><line x1="1056" y1="0" x2="1056" y2="630"/><line x1="1152" y1="0" x2="1152" y2="630"/><line x1="1248" y1="0" x2="1248" y2="630"/>
+    <line x1="0" y1="0" x2="1200" y2="0"/><line x1="0" y1="96" x2="1200" y2="96"/><line x1="0" y1="192" x2="1200" y2="192"/><line x1="0" y1="288" x2="1200" y2="288"/><line x1="0" y1="384" x2="1200" y2="384"/><line x1="0" y1="480" x2="1200" y2="480"/><line x1="0" y1="576" x2="1200" y2="576"/><line x1="0" y1="672" x2="1200" y2="672"/>
+  </g>
+
+  <rect x="80" y="112" width="56" height="1.5" fill="#37c8d8"/>
+  <text x="152" y="119" font-family="monospace" font-size="19" letter-spacing="3.4" fill="#8b939c">
+    ELECTRONICS &amp; ROBOTICS ENGINEER
+  </text>
+
+  <text x="80" y="330" font-family="Inter Tight, Helvetica, Arial, sans-serif"
+        font-size="104" font-weight="600" letter-spacing="-3.4" fill="#f0f2f4">
+    Achyuthan Raghavan
+  </text>
+
+  <text x="80" y="400" font-family="Inter, Helvetica, Arial, sans-serif"
+        font-size="31" fill="#9aa2ab">
+    Embedded systems · Robotics · UAV · PCB design
+  </text>
+
+  <rect x="80" y="500" width="1040" height="1" fill="#ffffff" fill-opacity="0.1"/>
+  <text x="80" y="548" font-family="monospace" font-size="21" letter-spacing="2" fill="#666e77">
+    achyuthanraghavan.com
+  </text>
+</svg>

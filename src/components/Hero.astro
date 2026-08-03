@@ -1,0 +1,90 @@
+---
+import Icon from './Icon.astro';
+import { site, heroStats } from '../data/site';
+---
+
+<section class="relative flex min-h-[92svh] flex-col justify-between pt-[var(--nav-h)]">
+  <div class="grid-backdrop pointer-events-none absolute inset-0 -z-10" aria-hidden="true"></div>
+
+  <!-- ---------- Headline ---------- -->
+  <div class="shell flex flex-1 items-center py-16 sm:py-20">
+    <div class="w-full">
+      <div class="grid gap-y-10 lg:grid-cols-12 lg:gap-x-12">
+        <div class="lg:col-span-8 xl:col-span-7">
+          <p class="eyebrow anim-fade-up">{site.role}</p>
+
+          <h1
+            class="display anim-fade-up mt-6 text-[clamp(2.5rem,9vw,5.75rem)] sm:mt-8"
+            style="animation-delay:.06s"
+          >
+            {site.name}
+          </h1>
+
+          <p
+            class="lede anim-fade-up mt-7 max-w-xl sm:mt-8"
+            style="animation-delay:.12s"
+          >
+            I design and build complete engineering systems — embedded firmware, high-current
+            boards, autonomous rovers and UAV platforms — from first schematic through to something
+            that survives a field test.
+          </p>
+
+          <div class="anim-fade-up mt-9 flex flex-wrap gap-3 sm:mt-10" style="animation-delay:.18s">
+            <a href="/projects" class="btn btn-primary">
+              View projects
+              <Icon name="arrowRight" class="size-4" />
+            </a>
+            <a href={site.resume} class="btn btn-ghost" download>
+              <Icon name="download" class="size-4" />
+              Résumé
+            </a>
+            <a href="/contact" class="btn btn-ghost">Contact</a>
+          </div>
+        </div>
+
+        <!-- Spec sheet — reads like a datasheet header, not a hero graphic -->
+        <dl
+          class="anim-fade-up self-end border-t border-[var(--line)] pt-6 lg:col-span-4 lg:col-start-9 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-2"
+          style="animation-delay:.24s"
+        >
+          {
+            [
+              { k: 'Focus', v: 'Embedded · Robotics · UAV' },
+              { k: 'Disciplines', v: 'Electronics, firmware, mechanical' },
+              { k: 'Based in', v: site.location },
+              { k: 'Status', v: 'Open to roles & collaborations' },
+            ].map((row) => (
+              <div class="flex justify-between gap-6 border-b border-[var(--line)] py-3 last:border-b-0 lg:block lg:border-b-0 lg:py-0 lg:pb-5">
+                <dt class="label shrink-0">{row.k}</dt>
+                <dd class="text-right text-sm text-fg lg:mt-1.5 lg:text-left">{row.v}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <!-- ---------- Stat rail ---------- -->
+  <div class="border-t border-[var(--line)]">
+    <div class="shell">
+      <dl class="grid grid-cols-2 sm:grid-cols-4">
+        {
+          heroStats.map((s, i) => (
+            <div
+              class:list={[
+                'py-6 sm:py-7',
+                i > 0 && 'sm:border-l sm:border-[var(--line)] sm:pl-6',
+                i % 2 === 1 && 'border-l border-[var(--line)] pl-5 sm:pl-6',
+                i > 1 && 'border-t border-[var(--line)] sm:border-t-0',
+              ]}
+            >
+              <dt class="display text-2xl text-fg sm:text-[1.75rem]">{s.value}</dt>
+              <dd class="label mt-2 block leading-snug">{s.label}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </div>
+</section>

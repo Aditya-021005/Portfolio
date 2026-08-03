@@ -1,0 +1,62 @@
+---
+import Icon from './Icon.astro';
+import { skillDomains } from '../data/skills';
+
+interface Props {
+  /** Show only these keys, in this order. Omit for all. */
+  only?: string[];
+}
+
+const { only } = Astro.props;
+const domains = only
+  ? only.map((k) => skillDomains.find((d) => d.key === k)).filter(Boolean as unknown as (v: unknown) => v is (typeof skillDomains)[number])
+  : skillDomains;
+---
+
+<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+  {
+    domains.map((domain, i) => (
+      <details
+        class="skill-card glass glass-hover group rounded-[var(--radius-card)] p-6 open:bg-white/[0.055]"
+        data-reveal
+        style={`--reveal-delay:${Math.min(i, 6) * 55}ms`}
+      >
+        <summary class="flex cursor-pointer list-none items-start gap-4 [&::-webkit-details-marker]:hidden">
+          <span class="relative grid size-11 shrink-0 place-items-center rounded-xl border border-[var(--line-strong)] bg-white/4 text-cyan-soft transition-colors duration-500 group-hover:border-cyan-neon/45">
+            <Icon name={domain.icon} class="size-5" />
+            <span class="absolute inset-0 rounded-xl bg-cyan-neon/20 opacity-0 blur-lg transition-opacity duration-500 group-hover:opacity-100" />
+          </span>
+
+          <span class="min-w-0 flex-1">
+            <span class="flex items-center justify-between gap-3">
+              <span class="block font-display text-[1.05rem] font-semibold text-fg">
+                {domain.title}
+              </span>
+              <Icon
+                name="plus"
+                class="size-4 shrink-0 text-fg-faint transition-transform duration-500 group-open:rotate-45"
+              />
+            </span>
+            <span class="mt-2 block text-sm leading-relaxed text-fg-muted">{domain.blurb}</span>
+          </span>
+        </summary>
+
+        <div class="mt-5 flex flex-wrap gap-2 border-t border-[var(--line)] pt-5">
+          {domain.items.map((item) => (
+            <span class="chip">{item}</span>
+          ))}
+        </div>
+      </details>
+    ))
+  }
+</div>
+
+<style>
+  /* Smooth-ish open animation for the details body */
+  .skill-card > div {
+    animation: fade-up 0.5s var(--ease-out-expo) both;
+  }
+  .skill-card:not([open]) > div {
+    animation: none;
+  }
+</style>

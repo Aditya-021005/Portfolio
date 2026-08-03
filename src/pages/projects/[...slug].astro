@@ -1,0 +1,307 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+import ProjectVisual from '../../components/ProjectVisual.astro';
+import Gallery from '../../components/Gallery.astro';
+import VideoEmbed from '../../components/VideoEmbed.astro';
+import TechStack from '../../components/TechStack.astro';
+import LinkList from '../../components/LinkList.astro';
+import Toc from '../../components/Toc.astro';
+import ScrollProgress from '../../components/ScrollProgress.astro';
+import { getProjects, siblings, seriesOf } from '../../lib/projects';
+
+export async function getStaticPaths() {
+  const projects = await getProjects();
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { data } = project;
+const { Content, headings } = await render(project);
+
+const all = await getProjects();
+const { prev, next } = siblings(all, project.id);
+const series = seriesOf(all, project);
+
+const extraToc = [
+  data.gallery.length > 0 && { slug: 'gallery', text: 'Gallery' },
+  data.videos.length > 0 && { slug: 'video', text: 'Video' },
+  { slug: 'stack', text: 'Technologies used' },
+].filter(Boolean) as { slug: string; text: string }[];
+
+const meta = [
+  { label: 'Year', value: data.year },
+  data.role && { label: 'Role', value: data.role },
+  { label: 'Status', value: data.status },
+  { label: 'Discipline', value: data.category },
+].filter(Boolean) as { label: string; value: string }[];
+---
+
+<BaseLayout title={data.title} description={data.summary} image={data.cover} bleed>
+  <ScrollProgress />
+
+  <!-- ==================== HERO ==================== -->
+  <header class="relative overflow-hidden pt-[var(--nav-h)]">
+    <div class="absolute inset-0" aria-hidden="true">
+      <ProjectVisual
+        cover={data.cover}
+        title={data.title}
+        slug={project.id}
+        category={data.category}
+        accent={data.accent}
+        hero
+        loading="eager"
+        class="size-full opacity-45"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-void via-void/70 to-void/45"></div>
+    </div>
+
+    <div class="shell relative pb-16 pt-16 sm:pb-20 sm:pt-24">
+      <a
+        href="/projects"
+        class="group inline-flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-[0.18em] text-fg-faint transition-colors hover:text-cyan-soft"
+      >
+        <Icon
+          name="arrowLeft"
+          class="size-3.5 transition-transform duration-500 group-hover:-translate-x-1"
+        />
+        All projects
+      </a>
+
+      <div class="mt-8 flex flex-wrap items-center gap-2">
+        <span class="chip chip-accent">{data.category}</span>
+        <span class="chip">{data.status}</span>
+        <span class="chip">{data.year}</span>
+        {
+          data.series && (
+            <span class="chip">
+              {data.series.name} · Part {data.series.part}
+            </span>
+          )
+        }
+      </div>
+
+      <h1 class="display anim-fade-up mt-6 max-w-4xl text-[clamp(2.25rem,6.5vw,4.5rem)]">
+        {data.title}
+      </h1>
+
+      {
+        data.tagline && (
+          <p class="anim-fade-up mt-5 max-w-2xl font-mono text-base text-cyan-soft/85 sm:text-lg" style="animation-delay:.08s">
+            {data.tagline}
+          </p>
+        )
+      }
+
+      <p
+        class="anim-fade-up mt-6 max-w-2xl text-lg leading-relaxed text-fg-muted"
+        style="animation-delay:.14s"
+      >
+        {data.summary}
+      </p>
+
+      <!-- Meta strip -->
+      <dl
+        class="mt-12 grid grid-cols-2 gap-x-6 gap-y-6 border-t border-[var(--line-strong)] pt-8 sm:grid-cols-4"
+      >
+        {
+          meta.map((m) => (
+            <div>
+              <dt class="font-mono text-[0.62rem] uppercase tracking-[0.18em] text-fg-faint">
+                {m.label}
+              </dt>
+              <dd class="mt-2 text-sm font-medium text-fg">{m.value}</dd>
+            </div>
+          ))
+        }
+      </dl>
+
+      {
+        (data.links.length > 0 || data.downloads.length > 0) && (
+          <div class="mt-8 flex flex-wrap gap-3">
+            <LinkList links={data.links} />
+            <LinkList links={data.downloads} download />
+          </div>
+        )
+      }
+    </div>
+  </header>
+
+  <!-- ==================== HIGHLIGHTS ==================== -->
+  {
+    data.highlights.length > 0 && (
+      <div class="border-y border-[var(--line)] bg-white/[0.015]">
+        <div class="shell">
+          <dl class="grid grid-cols-2 divide-white/8 sm:grid-cols-4 sm:divide-x">
+            {data.highlights.map((h, i) => (
+              <div
+                class:list={[
+                  'px-2 py-8 sm:px-8 sm:first:pl-0 sm:last:pr-0',
+                  i % 2 === 1 && 'border-l border-[var(--line)] sm:border-l-0',
+                  i > 1 && 'border-t border-[var(--line)] sm:border-t-0',
+                ]}
+                data-reveal
+                style={`--reveal-delay:${i * 70}ms`}
+              >
+                <dt class="display text-3xl text-fg sm:text-4xl">{h.value}</dt>
+                <dd class="mt-2 font-mono text-[0.62rem] uppercase leading-snug tracking-[0.14em] text-fg-faint">
+                  {h.label}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
+    )
+  }
+
+  <!-- ==================== BODY ==================== -->
+  <div class="shell py-20 sm:py-24">
+    <div class="grid gap-14 lg:grid-cols-[minmax(0,1fr)_15rem] lg:gap-16">
+      <article class="prose min-w-0 max-w-[46rem]">
+        <Content />
+      </article>
+
+      <Toc headings={headings} extra={extraToc} />
+    </div>
+  </div>
+
+  <!-- ==================== GALLERY ==================== -->
+  {
+    data.gallery.length > 0 && (
+      <section class="shell py-16" aria-labelledby="gallery">
+        <h2 id="gallery" class="display text-3xl sm:text-4xl" data-reveal>
+          Gallery
+        </h2>
+        <div class="mt-10">
+          <Gallery items={data.gallery} />
+        </div>
+      </section>
+    )
+  }
+
+  <!-- ==================== VIDEO ==================== -->
+  {
+    data.videos.length > 0 && (
+      <section class="shell py-16" aria-labelledby="video">
+        <h2 id="video" class="display text-3xl sm:text-4xl" data-reveal>
+          Video
+        </h2>
+        <div class="mt-10">
+          <VideoEmbed videos={data.videos} />
+        </div>
+      </section>
+    )
+  }
+
+  <!-- ==================== STACK ==================== -->
+  <section class="shell py-16" aria-labelledby="stack">
+    <h2 id="stack" class="display text-3xl sm:text-4xl" data-reveal>Technologies used</h2>
+    <div class="mt-10">
+      <TechStack stack={data.stack} />
+    </div>
+
+    {
+      data.tags.length > 0 && (
+        <div class="mt-8 flex flex-wrap gap-2" data-reveal>
+          {data.tags.map((tag) => (
+            <span class="chip">{tag}</span>
+          ))}
+        </div>
+      )
+    }
+  </section>
+
+  <!-- ==================== SERIES ==================== -->
+  {
+    series.length > 1 && (
+      <section class="shell py-16" aria-labelledby="series">
+        <h2 id="series" class="display text-3xl sm:text-4xl" data-reveal>
+          {data.series?.name}
+        </h2>
+        <div class="mt-10 grid gap-4 sm:grid-cols-3">
+          {series.map((entry) => {
+            const current = entry.id === project.id;
+            return (
+              <a
+                href={`/projects/${entry.id}`}
+                class:list={[
+                  'glass glass-hover group rounded-[var(--radius-card)] p-6',
+                  current && 'border-cyan-neon/40 bg-cyan-neon/[0.06]',
+                ]}
+                aria-current={current ? 'page' : undefined}
+                data-reveal
+              >
+                <span class="font-mono text-[0.68rem] tracking-[0.2em] text-cyan-dim">
+                  PART {String(entry.data.series?.part).padStart(2, '0')}
+                </span>
+                <span class="display mt-3 block text-lg transition-colors group-hover:text-cyan-soft">
+                  {entry.data.title}
+                </span>
+                <span class="mt-2 block text-sm leading-relaxed text-fg-muted line-clamp-2">
+                  {entry.data.summary}
+                </span>
+                {current && (
+                  <span class="mt-4 inline-block font-mono text-[0.62rem] uppercase tracking-[0.18em] text-cyan-soft">
+                    You are here
+                  </span>
+                )}
+              </a>
+            );
+          })}
+        </div>
+      </section>
+    )
+  }
+
+  <!-- ==================== PREV / NEXT ==================== -->
+  <nav class="shell py-16" aria-label="More projects">
+    <div class="hairline mb-12"></div>
+    <div class="grid gap-4 sm:grid-cols-2">
+      {
+        prev && (
+          <a
+            href={`/projects/${prev.id}`}
+            class="glass glass-hover group rounded-[var(--radius-card)] p-6 sm:p-8"
+          >
+            <span class="flex items-center gap-2 font-mono text-[0.62rem] uppercase tracking-[0.18em] text-fg-faint">
+              <Icon
+                name="arrowLeft"
+                class="size-3.5 transition-transform duration-500 group-hover:-translate-x-1"
+              />
+              Previous
+            </span>
+            <span class="display mt-4 block text-xl transition-colors group-hover:text-cyan-soft sm:text-2xl">
+              {prev.data.title}
+            </span>
+            <span class="mt-2 block text-sm text-fg-muted">{prev.data.category}</span>
+          </a>
+        )
+      }
+      {
+        next && (
+          <a
+            href={`/projects/${next.id}`}
+            class="glass glass-hover group rounded-[var(--radius-card)] p-6 text-right sm:p-8"
+          >
+            <span class="flex items-center justify-end gap-2 font-mono text-[0.62rem] uppercase tracking-[0.18em] text-fg-faint">
+              Next
+              <Icon
+                name="arrowRight"
+                class="size-3.5 transition-transform duration-500 group-hover:translate-x-1"
+              />
+            </span>
+            <span class="display mt-4 block text-xl transition-colors group-hover:text-cyan-soft sm:text-2xl">
+              {next.data.title}
+            </span>
+            <span class="mt-2 block text-sm text-fg-muted">{next.data.category}</span>
+          </a>
+        )
+      }
+    </div>
+  </nav>
+</BaseLayout>

@@ -1,0 +1,54 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  stack: {
+    hardware: string[];
+    software: string[];
+    tools: string[];
+  };
+}
+
+const { stack } = Astro.props;
+
+const groups = [
+  { key: 'hardware', label: 'Hardware', icon: 'board', items: stack.hardware },
+  { key: 'software', label: 'Software & Firmware', icon: 'code', items: stack.software },
+  { key: 'tools', label: 'Tools & Methods', icon: 'wrench', items: stack.tools },
+].filter((g) => g.items.length > 0);
+---
+
+{
+  groups.length > 0 && (
+    <div class="grid gap-4 md:grid-cols-3">
+      {groups.map((group, i) => (
+        <div
+          class="glass rounded-[var(--radius-card)] p-6"
+          data-reveal
+          style={`--reveal-delay:${i * 70}ms`}
+        >
+          <div class="flex items-center gap-3">
+            <span class="grid size-9 place-items-center rounded-lg border border-[var(--line-strong)] bg-white/4 text-cyan-soft">
+              <Icon name={group.icon} class="size-4" />
+            </span>
+            <h3 class="font-mono text-[0.68rem] uppercase tracking-[0.18em] text-fg-faint">
+              {group.label}
+            </h3>
+          </div>
+
+          <ul class="mt-5 space-y-2.5">
+            {group.items.map((item) => (
+              <li class="flex items-start gap-2.5 text-sm leading-relaxed text-fg-muted">
+                <span
+                  class="mt-[0.5em] size-1.5 shrink-0 rotate-45 bg-cyan-neon/70"
+                  aria-hidden="true"
+                />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  )
+}

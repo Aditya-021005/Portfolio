@@ -1,0 +1,111 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import Marquee from '../components/Marquee.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import SkillGrid from '../components/SkillGrid.astro';
+import Timeline from '../components/Timeline.astro';
+import Icon from '../components/Icon.astro';
+import { getProjects, getFeatured } from '../lib/projects';
+import { toolStrip } from '../data/skills';
+
+const all = await getProjects();
+const featured = await getFeatured();
+const rest = all.filter((p) => !p.data.featured).slice(0, 4);
+---
+
+<BaseLayout bleed>
+  <Hero />
+
+  <Marquee items={toolStrip} />
+
+  <!-- ==================== FEATURED WORK ==================== -->
+  <Section
+    id="work"
+    eyebrow="Selected work"
+    title="Systems built end to end."
+    lead="Each project below covers the full stack — requirements, electronics, firmware, mechanics and the field testing that proved it out."
+  >
+    <div class="space-y-28">
+      {featured.map((project, i) => <ProjectCard project={project} featured index={i} />)}
+    </div>
+
+    {
+      rest.length > 0 && (
+        <>
+          <div class="hairline my-24" />
+          <div class="grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-4">
+            {rest.map((project, i) => (
+              <ProjectCard project={project} index={featured.length + i} />
+            ))}
+          </div>
+        </>
+      )
+    }
+
+    <div class="mt-20 flex justify-center" data-reveal>
+      <a href="/projects" class="btn btn-ghost">
+        All {all.length} projects
+        <Icon name="arrowRight" class="size-4" />
+      </a>
+    </div>
+  </Section>
+
+  <!-- ==================== CAPABILITIES ==================== -->
+  <Section
+    eyebrow="Capabilities"
+    title="Electronics, firmware, mechanics — one head."
+    lead="Interdisciplinary work is where most projects break. I've deliberately built depth across every layer so the integration seams don't become someone else's problem."
+    class="border-t border-[var(--line)]"
+  >
+    <SkillGrid only={['embedded', 'pcb', 'robotics', 'uav', 'vision', 'power']} />
+
+    <div class="mt-10 flex justify-center" data-reveal>
+      <a href="/about#skills" class="btn btn-ghost">
+        Full capability breakdown
+        <Icon name="arrowRight" class="size-4" />
+      </a>
+    </div>
+  </Section>
+
+  <!-- ==================== PHILOSOPHY ==================== -->
+  <section class="border-y border-[var(--line)] py-24 sm:py-28">
+    <div class="shell">
+      <div class="grid gap-10 lg:grid-cols-12 lg:gap-16" data-reveal>
+        <p class="eyebrow lg:col-span-3">Design philosophy</p>
+
+        <div class="lg:col-span-9">
+          <blockquote class="display text-2xl leading-[1.25] sm:text-[2.125rem]">
+            Prototype fast, break it on purpose, and let each revision earn its place in the next
+            one.
+          </blockquote>
+          <p class="mt-8 max-w-xl leading-relaxed text-fg-muted">
+            Three console generations, a rover programme and a 650&nbsp;mm UAV taught me the same
+            lesson: reliability isn't designed in at the start — it's iterated in.
+          </p>
+          <a href="/about" class="nudge btn btn-ghost mt-9">
+            How I work
+            <Icon name="arrowRight" class="size-4" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== JOURNEY ==================== -->
+  <Section
+    eyebrow="Engineering journey"
+    title="Recent milestones."
+    lead="Leadership positions, internships and the builds that came out of them."
+  >
+    <Timeline limit={5} />
+
+    <div class="mt-14 flex justify-center" data-reveal>
+      <a href="/about#timeline" class="btn btn-ghost">
+        Full timeline
+        <Icon name="arrowRight" class="size-4" />
+      </a>
+    </div>
+  </Section>
+</BaseLayout>

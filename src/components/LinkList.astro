@@ -1,0 +1,43 @@
+---
+import Icon from './Icon.astro';
+
+interface Link {
+  label: string;
+  href: string;
+  icon: 'github' | 'external' | 'pdf' | 'file' | 'video' | 'code';
+}
+
+interface Props {
+  links: Link[];
+  /** Downloads get the download attribute + a subtly different affordance */
+  download?: boolean;
+}
+
+const { links, download = false } = Astro.props;
+const isExternal = (href: string) => /^https?:\/\//.test(href);
+---
+
+{
+  links.length > 0 && (
+    <div class="flex flex-wrap gap-3">
+      {links.map((link) => (
+        <a
+          href={link.href}
+          download={download && !isExternal(link.href) ? '' : undefined}
+          target={isExternal(link.href) ? '_blank' : undefined}
+          rel={isExternal(link.href) ? 'noopener noreferrer' : undefined}
+          class="glass glass-hover group inline-flex items-center gap-3 rounded-xl px-4 py-3"
+        >
+          <span class="grid size-8 place-items-center rounded-lg border border-[var(--line-strong)] bg-white/4 text-cyan-soft">
+            <Icon name={link.icon} class="size-4" />
+          </span>
+          <span class="text-sm text-fg">{link.label}</span>
+          <Icon
+            name={download ? 'download' : isExternal(link.href) ? 'arrowUpRight' : 'arrowRight'}
+            class="size-4 text-fg-faint transition-transform duration-500 group-hover:translate-x-0.5"
+          />
+        </a>
+      ))}
+    </div>
+  )
+}

@@ -1,0 +1,49 @@
+---
+/**
+ * Standard section wrapper: eyebrow + title + optional lead, then the slot.
+ * Pass `narrow` for prose-width content.
+ */
+interface Props {
+  id?: string;
+  eyebrow?: string;
+  title?: string;
+  lead?: string;
+  narrow?: boolean;
+  align?: 'left' | 'center';
+  class?: string;
+}
+
+const {
+  id,
+  eyebrow,
+  title,
+  lead,
+  narrow = false,
+  align = 'left',
+  class: className = '',
+} = Astro.props;
+---
+
+<section id={id} class:list={['relative py-24 sm:py-28', className]}>
+  <div class={narrow ? 'shell-narrow' : 'shell'}>
+    {
+      (eyebrow || title || lead) && (
+        <header
+          class:list={[
+            'max-w-3xl',
+            align === 'center' && 'mx-auto text-center',
+          ]}
+          data-reveal
+        >
+          {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+          {title && <h2 class="display mt-4 text-3xl sm:text-4xl lg:text-[2.75rem]">{title}</h2>}
+          {lead && <p class="mt-5 text-lg leading-relaxed text-fg-muted">{lead}</p>}
+        </header>
+      )
+    }
+
+    <div class:list={[(eyebrow || title || lead) && 'mt-14']}>
+      <slot />
+    </div>
+  </div>
+</section>

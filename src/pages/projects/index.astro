@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { getProjects, categoriesOf } from '../../lib/projects';
+
+const projects = await getProjects();
+const categories = categoriesOf(projects);
+---
+
+<BaseLayout
+  title="Projects"
+  description="Embedded systems, robotics, UAV, PCB design and computer-vision projects — full build write-ups."
+>
+  <!-- Header -->
+  <header class="relative overflow-hidden pb-4 pt-2 sm:pt-6">
+    <div class="grid-backdrop pointer-events-none absolute inset-0" aria-hidden="true"></div>
+    <div class="shell relative">
+      <p class="eyebrow anim-fade-up">Work — {projects.length} projects</p>
+      <h1 class="display anim-fade-up mt-5 text-[clamp(2.5rem,7vw,4.5rem)]" style="animation-delay:.08s">
+        Every build,<br /><span class="text-gradient">documented properly.</span>
+      </h1>
+      <p
+        class="anim-fade-up mt-6 max-w-2xl text-lg leading-relaxed text-fg-muted"
+        style="animation-delay:.16s"
+      >
+        Problem statement, design process, hardware, firmware, what broke, and what the next
+        revision fixed. Filter by discipline below.
+      </p>
+    </div>
+  </header>
+
+  <!-- Filter bar -->
+  <div class="sticky z-30 py-5" style="top:var(--nav-h)">
+    <div class="shell">
+      <div
+        class="glass flex gap-2 overflow-x-auto rounded-full p-1.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        role="tablist"
+        aria-label="Filter projects by category"
+      >
+        <button
+          type="button"
+          class="filter-btn shrink-0 rounded-full px-4 py-2 font-mono text-[0.7rem] uppercase tracking-[0.12em] transition-all duration-400"
+          data-filter="all"
+          role="tab"
+          aria-selected="true"
+        >
+          All
+        </button>
+        {
+          categories.map((cat) => (
+            <button
+              type="button"
+              class="filter-btn shrink-0 rounded-full px-4 py-2 font-mono text-[0.7rem] uppercase tracking-[0.12em] transition-all duration-400"
+              data-filter={cat}
+              role="tab"
+              aria-selected="false"
+            >
+              {cat}
+            </button>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- Grid -->
+  <div class="shell pb-24 pt-8">
+    <div id="project-grid" class="grid gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
+      {projects.map((project, i) => <ProjectCard project={project} index={i} />)}
+    </div>
+
+    <p id="empty-state" class="hidden py-24 text-center text-fg-muted">
+      No projects in this category yet.
+    </p>
+  </div>
+</BaseLayout>
+
+<style>
+  .filter-btn {
+    color: var(--color-fg-muted);
+  }
+  .filter-btn:hover {
+    color: var(--color-fg);
+  }
+  .filter-btn[aria-selected='true'] {
+    background: color-mix(in oklab, var(--color-cyan-neon) 14%, transparent);
+    color: var(--color-cyan-soft);
+    box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--color-cyan-neon) 35%, transparent);
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    const buttons = Array.from(document.querySelectorAll('.filter-btn'));
+    const cards = Array.from(document.querySelectorAll('#project-grid [data-category]'));
+    const empty = document.getElementById('empty-state');
+    if (!buttons.length || !cards.length) return;
+
+    const apply = (filter) => {
+      let shown = 0;
+      cards.forEach((card) => {
+        const match = filter === 'all' || card.dataset.category === filter;
+        card.classList.toggle('hidden', !match);
+        if (match) shown++;
+      });
+      empty?.classList.toggle('hidden', shown > 0);
+
+      const url = new URL(window.location.href);
+      if (filter === 'all') url.searchParams.delete('category');
+      else url.searchParams.set('category', filter);
+      history.replaceState(null, '', url);
+    };
+
+    const select = (filter) => {
+      buttons.forEach((b) => b.setAttribute('aria-selected', String(b.dataset.filter === filter)));
+      apply(filter);
+    };
+
+    buttons.forEach((b) => b.addEventListener('click', () => select(b.dataset.filter)));
+
+    const initial = new URL(window.location.href).searchParams.get('category');
+    if (initial && buttons.some((b) => b.dataset.filter === initial)) select(initial);
+  })();
+</script>

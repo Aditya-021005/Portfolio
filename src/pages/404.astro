@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+---
+
+<BaseLayout title="Page not found" description="That page doesn't exist.">
+  <section class="shell flex min-h-[70svh] flex-col justify-center py-20">
+    <p class="eyebrow">Error 404</p>
+    <h1 class="display mt-6 max-w-3xl text-[clamp(2.25rem,7vw,4.5rem)]">
+      No signal on this channel.
+    </h1>
+    <p class="lede mt-6 max-w-md">
+      The page you're after has moved or never existed. The work is all still here.
+    </p>
+    <div class="mt-10 flex flex-wrap gap-3">
+      <a href="/" class="btn btn-primary">
+        Back home
+        <Icon name="arrowRight" class="size-4" />
+      </a>
+      <a href="/projects" class="nudge btn btn-ghost">
+        Browse projects
+        <Icon name="arrowRight" class="size-4" />
+      </a>
+    </div>
+  </section>
+</BaseLayout>

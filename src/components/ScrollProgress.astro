@@ -1,0 +1,42 @@
+---
+/** Thin reading-progress bar pinned under the nav. */
+---
+
+<div
+  class="fixed inset-x-0 z-40 h-px bg-white/6"
+  style="top:var(--nav-h)"
+  aria-hidden="true"
+>
+  <div
+    id="read-progress"
+    class="h-full origin-left bg-gradient-to-r from-cyan-neon to-blue-electric"
+    style="transform:scaleX(0)"
+  >
+  </div>
+</div>
+
+<script is:inline>
+  (() => {
+    const bar = document.getElementById('read-progress');
+    if (!bar) return;
+    let ticking = false;
+    const update = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const p = max > 0 ? Math.min(1, window.scrollY / max) : 0;
+      bar.style.transform = `scaleX(${p})`;
+      ticking = false;
+    };
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(update);
+        }
+      },
+      { passive: true }
+    );
+    window.addEventListener('resize', update, { passive: true });
+    update();
+  })();
+</script>
