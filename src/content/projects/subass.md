@@ -36,7 +36,7 @@ stack:
     - Sensor positioning
     - Interconnect reliability testing
     - Mechanical-electrical integration
-cover: /images/SUBASS_01.jpg
+cover: /images/SUBASS_01.jpeg
 
 ---
 
