@@ -31,7 +31,7 @@ stack:
     - PCB layout and routing
     - Component placement optimisation
     - Design for manufacture
-cover: /images/migraine-pcb/hero.jpg
+cover: /images/dev_01.png
 ---
 
 ## Overview
