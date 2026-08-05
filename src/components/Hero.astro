@@ -65,7 +65,59 @@ import { site, heroStats } from '../data/site';
     </div>
   </div>
 
-  <!-- ---------- Stat rail ---------- -->
+  <!-- ---------- Stat rail ----------
+       Values count up the first time the rail scrolls into view. The markup
+       already contains the final value, so this is purely additive — with JS
+       off, or reduced motion on, the numbers simply render as written. -->
+  <script is:inline>
+    (() => {
+      const els = document.querySelectorAll('[data-count]');
+      if (!els.length) return;
+      if (
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+        !('IntersectionObserver' in window)
+      )
+        return;
+
+      // "650mm" -> prefix "", number 650, suffix "mm"
+      const parse = (text) => {
+        const m = text.match(/^(\D*?)([\d.]+)(.*)$/s);
+        if (!m) return null;
+        return { pre: m[1], value: parseFloat(m[2]), suf: m[3], decimals: (m[2].split('.')[1] || '').length };
+      };
+
+      const run = (el) => {
+        const parsed = parse(el.textContent.trim());
+        if (!parsed) return;
+        const { pre, value, suf, decimals } = parsed;
+        const duration = 1100;
+        let start = null;
+
+        const step = (now) => {
+          if (start === null) start = now;
+          const t = Math.min(1, (now - start) / duration);
+          // easeOutExpo — fast out of the gate, settles precisely on the value
+          const eased = t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+          el.textContent = pre + (value * eased).toFixed(decimals) + suf;
+          if (t < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      };
+
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (!e.isIntersecting) return;
+            io.unobserve(e.target);
+            run(e.target);
+          });
+        },
+        { threshold: 0.6 }
+      );
+      els.forEach((el) => io.observe(el));
+    })();
+  </script>
+
   <div class="border-t border-[var(--line)]">
     <div class="shell">
       <dl class="grid grid-cols-2 sm:grid-cols-4">
@@ -79,7 +131,7 @@ import { site, heroStats } from '../data/site';
                 i > 1 && 'border-t border-[var(--line)] sm:border-t-0',
               ]}
             >
-              <dt class="display text-2xl text-fg sm:text-[1.75rem]">{s.value}</dt>
+              <dt class="display text-2xl text-fg sm:text-[1.75rem]" data-count>{s.value}</dt>
               <dd class="label mt-2 block leading-snug">{s.label}</dd>
             </div>
           ))
