@@ -36,7 +36,7 @@ stack:
     - Sensor positioning
     - Interconnect reliability testing
     - Mechanical-electrical integration
-  cover: /images/agri-drone/01.jpg
+  cover: /images/subass/SUBASS_01.jpg
 
 ---
 
