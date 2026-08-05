@@ -13,8 +13,8 @@ export const site = {
     'Developing integrated electronics, power systems and physical hardware for autonomous robotic applications. Focused on practical motor control, sensor integration and rapid hardware prototyping.',
   location: 'India',
   url: 'https://achyuthan-portfolio.vercel.app',
-  email: 'achyuthan.raghavan@example.com',
-  resume: '/resume.pdf',
+  email: 'achyuthanraghavan26@gmail.com',
+  resume: '"C:\Users\achyu\Downloads\Resume-Achyuthan_Raghavan.pdf"',
   ogImage: '/og.png',
 };
 
