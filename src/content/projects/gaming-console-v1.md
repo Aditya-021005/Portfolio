@@ -1,16 +1,16 @@
 ---
-title: Handheld Gaming Console — Generation I
+title: Mini Gaming Console — Generation I
 tagline: ESP32, an OLED, haptics, and three games written from scratch.
 summary: >-
-  The first handheld console: an ESP32 driving a 128×64 OLED, with a joystick, buttons, dual
+  The first mini console: an ESP32 driving a 128×64 OLED, with a joystick, buttons, dual
   vibration motors and Li-ion charging — plus three original games written from scratch with enemy
   AI, collision detection and full game-state handling.
 year: '2023 — 2024'
 role: Hardware, firmware, game development
 status: Shipped
 category: Embedded Systems
-order: 6
-series: { name: 'Handheld Console Series', part: 1 }
+order: 7
+series: { name: 'Mini Gaming Consoles', part: 1 }
 tags:
   - Embedded Systems
   - ESP32
@@ -43,7 +43,13 @@ stack:
     - Enclosure design
     - Point-to-point prototyping
     - Battery charging integration
-# cover: /images/gaming-console-v1/hero.jpg
+cover: /images/gaming-console-v1/01.jpg
+gallery:
+  - { src: /images/gaming-console-v1/01.jpg, alt: "Generation I console enclosure", caption: "Printed shell with the OLED visible along the top edge", span: normal }
+  - { src: /images/gaming-console-v1/02.jpg, alt: "Generation I console", span: normal }
+  - { src: /images/gaming-console-v1/03.jpg, alt: "Generation I console", span: normal }
+videos:
+  - { type: mp4, src: /videos/gaming-console-v1-prototype.mp4, title: "Generation I prototype — gameplay on the bench", poster: /images/gaming-console-v1/01.jpg }
 ---
 
 ## Overview

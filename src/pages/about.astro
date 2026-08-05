@@ -2,15 +2,14 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Section from '../components/Section.astro';
 import SkillGrid from '../components/SkillGrid.astro';
-import Timeline from '../components/Timeline.astro';
 import Icon from '../components/Icon.astro';
 import { site } from '../data/site';
 
 const principles = [
   {
     icon: 'layers',
-    title: 'Whole-stack ownership',
-    body: 'Most failures live at the seams between electronics, firmware and mechanics. I build across all three so those seams are mine to close, not somebody else’s to discover.',
+    title: 'Systems architecture & cross-domain integration',
+    body: 'Rather than working in isolation, I focus on systems-level coordination — making sure PCB layout, power distribution, mechanical enclosures and high-level control fit together cleanly across team domains.',
   },
   {
     icon: 'wrench',
@@ -31,26 +30,26 @@ const principles = [
 
 const enjoy = [
   'Bring-up day — first power-on of a board I laid out',
-  'Register-level firmware where the datasheet is the only documentation',
-  'Squeezing a battery, a display and a haptics driver into a smaller shell',
+  'Debugging an inverter stage until the waveform is what the datasheet promised',
   'Tuning a control loop until the platform stops fighting itself',
-  'Turning raw field imagery into something an agronomist can act on',
-  'Teaching juniors why a ground plane matters',
+  'Squeezing a battery, a display and a haptics driver into a smaller shell',
+  'Getting a sensor to report something I actually trust',
+  'Explaining to a junior why a ground plane matters',
 ];
 
 const interests = [
+  'Field-Oriented Control and 3-phase motor drive',
   'Autonomous navigation and sensor fusion',
   'High-current power distribution and BMS architecture',
-  'Edge AI on Jetson-class compute',
-  'Precision agriculture and remote sensing',
-  'Motor control and power electronics',
-  'Human-machine interfaces on constrained hardware',
+  'Persistent UAV operations and automated ground infrastructure',
+  'Digital image processing for field data',
+  'Mechanical–electrical integration on compact hardware',
 ];
 ---
 
 <BaseLayout
   title="About"
-  description="Electronics and Robotics Engineer working across embedded systems, autonomous robotics, UAVs, PCB design and computer vision."
+  description="Robotics and Hardware Systems Engineer working across power electronics, motor control, sensor integration, PCB design and mechanical integration."
 >
   <!-- ==================== INTRO ==================== -->
   <header class="relative overflow-hidden pb-8 pt-2 sm:pt-6">
@@ -61,26 +60,27 @@ const interests = [
         class="display anim-fade-up mt-5 max-w-4xl text-[clamp(2.25rem,6.5vw,4.25rem)]"
         style="animation-delay:.08s"
       >
-        I build complete engineering systems —
-        <span class="text-gradient">silicon to airframe.</span>
+        Engineering integrated hardware and
+        <span class="text-gradient">robotic systems.</span>
       </h1>
 
       <div class="mt-12 grid gap-12 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] lg:gap-16">
         <div class="anim-fade-up space-y-5 text-lg leading-relaxed text-fg-muted" style="animation-delay:.16s">
           <p>
-            I'm <strong class="text-fg">{site.name}</strong>, an Electronics and Robotics Engineer
-            passionate about building complete engineering systems from the ground up. My work spans
-            embedded systems, autonomous robotics, UAVs, PCB design, AI-assisted computer vision and
-            hardware–software integration.
+            I'm <strong class="text-fg">{site.name}</strong>, a Robotics and Hardware Systems
+            Engineer. I develop integrated electronics, power systems and physical hardware for
+            autonomous robotic applications — motor control, sensor integration, PCB design and the
+            mechanical work that holds it together.
           </p>
           <p>
-            I enjoy solving interdisciplinary engineering challenges that combine electronics,
-            firmware, mechanics and intelligent software into practical, real-world systems — the
-            kind that have to survive a field test, not just a bench demo.
+            Most of what I do sits at the boundaries: between a power stage and the control
+            algorithm driving it, between a board and the enclosure it has to fit, between what a
+            sensor reports and what is actually true. Those boundaries are where systems fail, and
+            they're the part I find worth doing well.
           </p>
           <p>
-            My goal is to design scalable autonomous platforms that bridge embedded intelligence
-            with robotics and sustainable technologies.
+            My goal is to build robotic platforms that work outside a lab — reliable enough that
+            the interesting problem becomes the mission, not the hardware.
           </p>
         </div>
 
@@ -90,21 +90,22 @@ const interests = [
           </p>
           <ul class="mt-5 space-y-4">
             <li class="flex gap-3">
-              <Icon name="drone" class="mt-0.5 size-4 shrink-0 text-cyan-soft" />
+              <Icon name="layers" class="mt-0.5 size-4 shrink-0 text-cyan-soft" />
               <span class="text-sm leading-relaxed text-fg-muted">
-                Building a 650&nbsp;mm precision-agriculture UAV and its ground-station GUI
+                <strong class="font-medium text-fg">SUBASS</strong> — an automated drone battery
+                swapping system for persistent UAV operations
               </span>
             </li>
             <li class="flex gap-3">
               <Icon name="robot" class="mt-0.5 size-4 shrink-0 text-cyan-soft" />
               <span class="text-sm leading-relaxed text-fg-muted">
-                Electrical Subsystem Lead at CRISS Robotics
+                Senior Technical Advisor at CRISS Robotics
               </span>
             </li>
             <li class="flex gap-3">
               <Icon name="bolt" class="mt-0.5 size-4 shrink-0 text-cyan-soft" />
               <span class="text-sm leading-relaxed text-fg-muted">
-                President of the Renewable Energy Club
+                Advisor at the Renewable Energy Club
               </span>
             </li>
           </ul>
@@ -185,9 +186,8 @@ const interests = [
         <div class="glass mt-10 rounded-[var(--radius-card)] p-7">
           <p class="eyebrow">Career goal</p>
           <p class="mt-4 leading-relaxed text-fg-muted">
-            To design scalable autonomous platforms that bridge embedded intelligence with robotics
-            and sustainable technologies — ideally on a team shipping hardware at volume, where the
-            gap between a prototype and a product is the interesting engineering problem.
+            To build robotic hardware on a team shipping at volume, where the gap between a working
+            prototype and a reliable product is the interesting engineering problem.
           </p>
         </div>
       </div>
@@ -205,11 +205,11 @@ const interests = [
     <SkillGrid />
   </Section>
 
-  <!-- ==================== LEADERSHIP ==================== -->
+  <!-- ==================== ROLES ==================== -->
   <Section
-    id="leadership"
-    eyebrow="Leadership & experience"
-    title="Leading the electrical side."
+    id="roles"
+    eyebrow="Current roles"
+    title="Advisory positions."
     class="border-t border-[var(--line)]"
   >
     <div class="grid gap-4 lg:grid-cols-2">
@@ -217,14 +217,14 @@ const interests = [
         <span class="grid size-11 place-items-center rounded-xl border border-[var(--line-strong)] bg-white/4 text-cyan-soft">
           <Icon name="leadership" class="size-5" />
         </span>
-        <h3 class="display mt-5 text-xl">Electrical Subsystem Lead</h3>
+        <h3 class="display mt-5 text-xl">Senior Technical Advisor</h3>
         <p class="mt-1.5 font-mono text-[0.7rem] uppercase tracking-[0.14em] text-cyan-soft">
           CRISS Robotics
         </p>
         <p class="mt-4 leading-relaxed text-fg-muted">
-          Led the electrical architecture for a multidisciplinary robotics team — battery systems,
-          power electronics, PCB reviews, subsystem integration, testing, documentation and
-          mentoring junior members.
+          Advising on the electrical architecture of a multidisciplinary rover programme — battery
+          systems, power distribution, PCB review and the integration decisions that determine
+          whether the subsystems meet cleanly.
         </p>
         <a
           href="/projects/criss-rover"
@@ -239,26 +239,15 @@ const interests = [
         <span class="grid size-11 place-items-center rounded-xl border border-[var(--line-strong)] bg-white/4 text-cyan-soft">
           <Icon name="bolt" class="size-5" />
         </span>
-        <h3 class="display mt-5 text-xl">President</h3>
+        <h3 class="display mt-5 text-xl">Advisor</h3>
         <p class="mt-1.5 font-mono text-[0.7rem] uppercase tracking-[0.14em] text-cyan-soft">
           Renewable Energy Club
         </p>
         <p class="mt-4 leading-relaxed text-fg-muted">
-          Managed club operations, organised technical workshops and events, coordinated student
-          build teams and promoted sustainable engineering initiatives across campus.
+          Supporting technical workshops, student build teams and sustainable engineering
+          initiatives across campus.
         </p>
       </article>
     </div>
-  </Section>
-
-  <!-- ==================== TIMELINE ==================== -->
-  <Section
-    id="timeline"
-    eyebrow="Engineering journey"
-    title="The path so far."
-    lead="Projects, internships, leadership positions and the milestones between them."
-    class="border-t border-[var(--line)]"
-  >
-    <Timeline />
   </Section>
 </BaseLayout>

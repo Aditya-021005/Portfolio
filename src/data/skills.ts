@@ -13,72 +13,45 @@ export type SkillDomain = {
 
 export const skillDomains: SkillDomain[] = [
   {
-    key: 'embedded',
-    title: 'Embedded Systems',
-    icon: 'chip',
-    blurb: 'Bare-metal to RTOS-adjacent firmware on eight-bit AVRs through Jetson-class compute.',
+    key: 'power',
+    title: 'Power Electronics',
+    icon: 'bolt',
+    blurb:
+      'Inverter hardware debugging and closed-loop motor control, through to battery systems and high-current distribution.',
     items: [
-      'ESP32',
-      'STM32',
-      'SAMD21',
-      'ATmega / bare-metal AVR',
-      'Arduino',
-      'TI C2000 LaunchPad',
-      'Jetson Nano',
-      'Jetson Orin Nano',
+      'Inverter hardware debugging & testing',
+      'Field-Oriented Control (FOC)',
+      '3-phase BLDC / PMSM motor control',
+      'Li-ion / LiPo battery systems',
+      'BMS design',
+      'Buck / boost regulation',
+      'High-current distribution',
+      'Power budgeting',
     ],
   },
   {
     key: 'pcb',
-    title: 'PCB Design',
+    title: 'PCB Design & EDA',
     icon: 'board',
-    blurb: 'Schematic capture through fabrication-ready layout, with a bias toward high-current and compact form factors.',
+    blurb:
+      'Schematic capture through fabrication-ready layout, with a bias toward high-current and compact form factors.',
     items: [
+      'Altium Designer',
       'KiCad',
-      'Cadence Allegro',
-      'High-current layout',
       'Schematic design',
+      'High-current layout',
       'Power distribution',
-      'Battery management',
       'Signal integrity',
+      'Hardware bring-up & debug',
       'DFM / assembly prep',
-    ],
-  },
-  {
-    key: 'micro',
-    title: 'Microcontrollers',
-    icon: 'cpu',
-    blurb: 'Register-level control of peripherals — timers, ADCs, SPI, I²C, UART, PWM and interrupt architecture.',
-    items: [
-      'Register-level programming',
-      'Timers & capture units',
-      'SPI / I²C / UART',
-      'ADC & DAC',
-      'PWM generation',
-      'Interrupt design',
-      'Low-power modes',
-    ],
-  },
-  {
-    key: 'vision',
-    title: 'Computer Vision',
-    icon: 'eye',
-    blurb: 'Image pipelines for field data — from raw aerial capture to crop-health inference.',
-    items: [
-      'OpenCV',
-      'Image processing',
-      'Orthomosaic generation',
-      'Crop health analysis',
-      'Thermal imaging',
-      'Geotagging',
-      'AI integration',
     ],
   },
   {
     key: 'robotics',
     title: 'Robotics',
     icon: 'robot',
-    blurb: 'Ground platforms: drivetrain, sensing, power architecture and the firmware that ties them together.',
+    blurb:
+      'Ground and aerial platforms: drivetrain, sensing, power architecture and the control that ties them together.',
     items: [
       'Autonomous navigation',
       'Differential drive',
@@ -86,6 +59,21 @@ export const skillDomains: SkillDomain[] = [
       'Sensor fusion',
       'Wireless robotics',
       'Subsystem integration',
+    ],
+  },
+  {
+    key: 'sensors',
+    title: 'Sensor Integration',
+    icon: 'signal',
+    blurb:
+      'Getting real, trustworthy measurements out of hardware — interfacing, calibration and noise rejection.',
+    items: [
+      'Analog front-end design',
+      'Optical & light-to-frequency sensing',
+      'IMU / GPS / compass integration',
+      'Precision frequency measurement',
+      'Calibration against references',
+      'Noise reduction techniques',
     ],
   },
   {
@@ -105,6 +93,52 @@ export const skillDomains: SkillDomain[] = [
     ],
   },
   {
+    key: 'programming',
+    title: 'Applied Programming',
+    icon: 'code',
+    blurb:
+      'Working knowledge of C++ and Python, used practically — including an AI-augmented rapid prototyping workflow.',
+    items: [
+      'C++',
+      'Python',
+      'AI-augmented development workflow',
+      'Digital Image Processing (DIP)',
+      'OpenCV',
+      'MATLAB',
+    ],
+  },
+  {
+    key: 'vision',
+    title: 'Computer Vision',
+    icon: 'eye',
+    blurb: 'Image pipelines for field data — from raw aerial capture to crop-health inference.',
+    items: [
+      'Digital Image Processing (DIP)',
+      'OpenCV',
+      'Orthomosaic generation',
+      'Crop health analysis',
+      'Thermal imaging',
+      'Geotagging',
+    ],
+  },
+  {
+    key: 'embedded',
+    title: 'Embedded Hardware',
+    icon: 'chip',
+    blurb:
+      'Controller-level work across eight-bit AVRs through Jetson-class compute, close to the peripherals.',
+    items: [
+      'ESP32',
+      'STM32',
+      'SAMD21',
+      'ATmega / bare-metal AVR',
+      'Arduino',
+      'TI C2000 LaunchPad',
+      'Jetson Nano',
+      'Jetson Orin Nano',
+    ],
+  },
+  {
     key: 'control',
     title: 'Control Systems',
     icon: 'wave',
@@ -112,30 +146,24 @@ export const skillDomains: SkillDomain[] = [
     items: [
       'Closed-loop control',
       'PID tuning',
+      'Field-Oriented Control',
       'Feedback sensing',
       'Flight tuning',
-      'Trajectory following',
       'MATLAB modelling',
     ],
-  },
-  {
-    key: 'programming',
-    title: 'Programming',
-    icon: 'code',
-    blurb: 'Firmware in C/C++, tooling and analysis in Python, modelling in MATLAB.',
-    items: ['C', 'C++', 'Embedded C', 'Python', 'MATLAB'],
   },
   {
     key: 'cad',
     title: 'CAD & Mechanical',
     icon: 'cube',
-    blurb: 'Enclosure design, packaging efficiency and print-ready mechanical iteration.',
+    blurb:
+      'Basic 3D modelling and component enclosures, sized for the electronics rather than the other way round.',
     items: [
-      'Enclosure design',
+      'Autodesk Fusion 360',
+      'Component enclosure layout',
       '3D printing / DFM',
       'Packaging optimisation',
       'Tolerance & fit',
-      'Assembly design',
     ],
   },
   {
@@ -145,25 +173,11 @@ export const skillDomains: SkillDomain[] = [
     blurb: 'Links that have to survive the field — telemetry, control and video.',
     items: ['Wi-Fi (ESP32)', 'MAVLink telemetry', 'RC / PPM & SBUS', 'FPV video links', 'Bluetooth'],
   },
-  {
-    key: 'power',
-    title: 'Power Electronics',
-    icon: 'bolt',
-    blurb: 'From cell chemistry and BMS through regulation, distribution and thermal budgeting.',
-    items: [
-      'Li-ion / LiPo systems',
-      'BMS design',
-      'Buck / boost regulation',
-      'High-current distribution',
-      'Charging circuits (TP4056)',
-      'Power budgeting',
-    ],
-  },
 ];
 
 /** Marquee strip of tool names on the home page */
 export const toolStrip = [
-  'ESP32', 'STM32', 'ATmega', 'SAMD21', 'Jetson Orin', 'Pixhawk', 'ArduPilot', 'MAVLink',
-  'KiCad', 'Cadence Allegro', 'OpenCV', 'Python', 'Embedded C', 'C++', 'MATLAB',
-  'Mission Planner', 'TI C2000', 'TP4056', 'BLHeli', 'FreeCAD',
+  'Altium Designer', 'KiCad', 'Fusion 360', 'FOC', 'BLDC / PMSM', 'Inverter debug',
+  'ESP32', 'STM32', 'ATmega', 'Jetson Orin', 'Pixhawk', 'ArduPilot', 'MAVLink',
+  'OpenCV', 'Python', 'C++', 'MATLAB', 'Mission Planner', 'TI C2000', 'BLHeli',
 ];

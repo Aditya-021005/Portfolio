@@ -9,7 +9,7 @@ year: '2024'
 role: Freelance hardware engineer
 status: Shipped
 category: PCB Design
-order: 8
+order: 9
 tags:
   - PCB Design
   - Medical Electronics

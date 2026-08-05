@@ -5,7 +5,6 @@ import Section from '../components/Section.astro';
 import Marquee from '../components/Marquee.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import SkillGrid from '../components/SkillGrid.astro';
-import Timeline from '../components/Timeline.astro';
 import Icon from '../components/Icon.astro';
 import { getProjects, getFeatured } from '../lib/projects';
 import { toolStrip } from '../data/skills';
@@ -24,8 +23,8 @@ const rest = all.filter((p) => !p.data.featured).slice(0, 4);
   <Section
     id="work"
     eyebrow="Selected work"
-    title="Systems built end to end."
-    lead="Each project below covers the full stack — requirements, electronics, firmware, mechanics and the field testing that proved it out."
+    title="Hardware that has to work."
+    lead="Each project below covers the engineering that mattered — requirements, electronics, power, mechanical integration and the testing that proved it out."
   >
     <div class="space-y-28">
       {featured.map((project, i) => <ProjectCard project={project} featured index={i} />)}
@@ -55,11 +54,11 @@ const rest = all.filter((p) => !p.data.featured).slice(0, 4);
   <!-- ==================== CAPABILITIES ==================== -->
   <Section
     eyebrow="Capabilities"
-    title="Electronics, firmware, mechanics — one head."
-    lead="Interdisciplinary work is where most projects break. I've deliberately built depth across every layer so the integration seams don't become someone else's problem."
+    title="Where the domains meet."
+    lead="Interdisciplinary work is where most projects break. I've built depth across power, electronics and mechanical so the integration seams get designed rather than discovered."
     class="border-t border-[var(--line)]"
   >
-    <SkillGrid only={['embedded', 'pcb', 'robotics', 'uav', 'vision', 'power']} />
+    <SkillGrid only={['power', 'pcb', 'robotics', 'sensors', 'uav', 'programming']} />
 
     <div class="mt-10 flex justify-center" data-reveal>
       <a href="/about#skills" class="btn btn-ghost">
@@ -93,19 +92,4 @@ const rest = all.filter((p) => !p.data.featured).slice(0, 4);
     </div>
   </section>
 
-  <!-- ==================== JOURNEY ==================== -->
-  <Section
-    eyebrow="Engineering journey"
-    title="Recent milestones."
-    lead="Leadership positions, internships and the builds that came out of them."
-  >
-    <Timeline limit={5} />
-
-    <div class="mt-14 flex justify-center" data-reveal>
-      <a href="/about#timeline" class="btn btn-ghost">
-        Full timeline
-        <Icon name="arrowRight" class="size-4" />
-      </a>
-    </div>
-  </Section>
 </BaseLayout>

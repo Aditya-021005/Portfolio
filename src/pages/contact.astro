@@ -9,7 +9,7 @@ const channels = [
     value: site.email,
     href: `mailto:${site.email}`,
     icon: 'mail',
-    note: 'Best for roles, freelance PCB work and collaborations.',
+    note: 'Best for roles, PCB work and research collaborations.',
     copy: true,
   },
   {
@@ -17,7 +17,7 @@ const channels = [
     value: socials.find((s) => s.label === 'GitHub')?.href.replace('https://', '') ?? '',
     href: socials.find((s) => s.label === 'GitHub')?.href ?? '#',
     icon: 'github',
-    note: 'Firmware, ground-station tooling and build scripts.',
+    note: 'Hardware tooling, control code and build scripts.',
   },
   {
     label: 'LinkedIn',
@@ -29,16 +29,16 @@ const channels = [
 ];
 
 const openTo = [
-  'Embedded systems / firmware engineering roles',
   'Robotics and UAV platform engineering',
-  'Freelance PCB design and hardware bring-up',
-  'Research collaborations in autonomy and remote sensing',
+  'PCB design and hardware bring-up',
+  'Research in electronics-based robotic systems',
+  'Sensor integration',
 ];
 ---
 
 <BaseLayout
   title="Contact"
-  description={`Get in touch with ${site.name} — embedded systems, robotics and UAV engineering.`}
+  description={`Get in touch with ${site.name} — robotics, power electronics and UAV hardware engineering.`}
 >
   <header class="relative overflow-hidden pb-6 pt-2 sm:pt-6">
     <div class="grid-backdrop pointer-events-none absolute inset-0" aria-hidden="true"></div>

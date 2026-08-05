@@ -13,7 +13,7 @@ const { stack } = Astro.props;
 
 const groups = [
   { key: 'hardware', label: 'Hardware', icon: 'board', items: stack.hardware },
-  { key: 'software', label: 'Software & Firmware', icon: 'code', items: stack.software },
+  { key: 'software', label: 'Software & Control', icon: 'code', items: stack.software },
   { key: 'tools', label: 'Tools & Methods', icon: 'wrench', items: stack.tools },
 ].filter((g) => g.items.length > 0);
 ---

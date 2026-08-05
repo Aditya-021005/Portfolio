@@ -84,12 +84,27 @@ const spanClass: Record<Media['span'], string> = {
 
           <button
             type="button"
+            class="nudge absolute left-5 top-5 inline-flex items-center gap-2 rounded-xl border border-[var(--line-strong)] bg-white/5 px-4 py-2.5 text-sm text-fg transition-colors hover:border-cyan-neon/50"
+            data-lightbox-close
+          >
+            <Icon name="arrowLeft" class="size-4" />
+            Back
+          </button>
+
+          <button
+            type="button"
             class="absolute right-5 top-5 grid size-11 place-items-center rounded-xl border border-[var(--line-strong)] bg-white/5 text-fg transition-colors hover:border-cyan-neon/50"
             data-lightbox-close
             aria-label="Close viewer"
           >
             <Icon name="close" class="size-5" />
           </button>
+
+          <p
+            class="absolute bottom-5 left-1/2 -translate-x-1/2 font-mono text-[0.7rem] tracking-[0.14em] text-fg-faint"
+          >
+            <span id="lightbox-index">1</span> / <span id="lightbox-total">1</span>
+          </p>
 
           <button
             type="button"
@@ -120,8 +135,15 @@ const spanClass: Record<Media['span'], string> = {
           const triggers = Array.from(document.querySelectorAll('[data-lightbox]'));
           if (!triggers.length) return;
 
+          const idxEl = document.getElementById('lightbox-index');
+          const totalEl = document.getElementById('lightbox-total');
+          if (totalEl) totalEl.textContent = String(triggers.length);
+
           let current = 0;
           let lastFocus = null;
+          // True while we own a history entry pushed on open, so the browser
+          // (or phone) back gesture closes the viewer instead of leaving the page.
+          let pushed = false;
 
           const show = (i) => {
             current = (i + triggers.length) % triggers.length;
@@ -129,22 +151,41 @@ const spanClass: Record<Media['span'], string> = {
             img.setAttribute('src', t.dataset.lightbox);
             img.setAttribute('alt', t.dataset.lightboxAlt || '');
             cap.textContent = t.dataset.lightboxCaption || '';
+            if (idxEl) idxEl.textContent = String(current + 1);
           };
 
-          const open = (i) => {
+          const reveal = (i) => {
             lastFocus = document.activeElement;
             show(i);
             box.classList.remove('pointer-events-none', 'opacity-0');
             box.setAttribute('aria-hidden', 'false');
             document.body.style.overflow = 'hidden';
+            box.querySelector('[data-lightbox-close]')?.focus();
           };
 
-          const close = () => {
+          const dismiss = () => {
             box.classList.add('pointer-events-none', 'opacity-0');
             box.setAttribute('aria-hidden', 'true');
             document.body.style.overflow = '';
             if (lastFocus && lastFocus.focus) lastFocus.focus();
           };
+
+          const open = (i) => {
+            reveal(i);
+            history.pushState({ lightbox: true }, '');
+            pushed = true;
+          };
+
+          // Closing pops our history entry; popstate then runs the actual dismiss.
+          const close = () => {
+            if (pushed) history.back();
+            else dismiss();
+          };
+
+          window.addEventListener('popstate', () => {
+            pushed = false;
+            if (box.getAttribute('aria-hidden') === 'false') dismiss();
+          });
 
           triggers.forEach((t, i) => t.addEventListener('click', () => open(i)));
           box.querySelectorAll('[data-lightbox-close]').forEach((el) =>

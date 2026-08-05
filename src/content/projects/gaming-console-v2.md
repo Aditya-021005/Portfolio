@@ -1,16 +1,16 @@
 ---
-title: Handheld Gaming Console — Generation II
+title: Mini Gaming Console — Generation II
 tagline: Same electronics, completely rebuilt package.
 summary: >-
-  A mechanical redesign of the handheld console: a magnetic snap-fit enclosure, relocated battery
+  A mechanical redesign of the mini console: a magnetic snap-fit enclosure, relocated battery
   that eliminated the Gen I bulge, cleaner internal wiring and a noticeably thinner, better
   balanced device.
 year: '2024'
 role: Mechanical design, packaging, assembly
 status: Shipped
 category: Embedded Systems
-order: 5
-series: { name: 'Handheld Console Series', part: 2 }
+order: 6
+series: { name: 'Mini Gaming Consoles', part: 2 }
 tags:
   - Product Design
   - Mechanical Design
@@ -36,7 +36,10 @@ stack:
     - 3D printing / DFM
     - Packaging optimisation
     - Tolerance and fit work
-# cover: /images/gaming-console-v2/hero.jpg
+cover: /images/gaming-console-v2/01.jpg
+gallery:
+  - { src: /images/gaming-console-v2/01.jpg, alt: "Generation II console running a game on the OLED", caption: "Monochrome OLED mid-game, joystick and button on the snap-fit shell", span: normal }
+  - { src: /images/gaming-console-v2/02.jpg, alt: "Generation II console enclosure", span: normal }
 ---
 
 ## Overview

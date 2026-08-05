@@ -10,7 +10,7 @@ role: Systems design, build, flight tuning, GUI development
 status: In Progress
 category: UAV
 featured: true
-order: 1
+order: 2
 tags:
   - UAV
   - Autonomous Systems
@@ -48,14 +48,7 @@ stack:
     - Centre-of-gravity planning
     - ESC & radio calibration
     - Failsafe configuration
-# cover: /images/agri-drone/hero.jpg
-# gallery:
-#   - { src: /images/agri-drone/frame.jpg, alt: "Assembled 650mm frame", caption: "Arms folded for transport", span: wide }
-#   - { src: /images/agri-drone/pixhawk.jpg, alt: "Pixhawk installation" }
-# videos:
-#   - { type: youtube, src: VIDEO_ID, title: "First autonomous waypoint mission" }
-# downloads:
-#   - { label: "Power budget (PDF)", href: /files/agri-drone-power-budget.pdf, icon: pdf }
+cover: /images/agri-drone/01.jpg
 ---
 
 ## Overview

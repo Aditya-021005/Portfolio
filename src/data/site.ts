@@ -6,12 +6,13 @@ export const site = {
   name: 'Achyuthan Raghavan',
   shortName: 'Achyuthan',
   initials: 'AR',
-  role: 'Electronics & Robotics Engineer',
-  tagline: 'I build complete engineering systems — silicon to airframe.',
+  role: 'Robotics & Hardware Systems Engineer',
+  tagline:
+    'Engineering integrated hardware and robotic systems — from power electronics and PCB design to mechanical integration.',
   description:
-    'Electronics and Robotics Engineer working across embedded systems, autonomous robotics, UAVs, high-current PCB design and AI-assisted computer vision.',
+    'Developing integrated electronics, power systems and physical hardware for autonomous robotic applications. Focused on practical motor control, sensor integration and rapid hardware prototyping.',
   location: 'India',
-  url: 'https://achyuthanraghavan.com',
+  url: 'https://achyuthan-portfolio.vercel.app',
   email: 'achyuthan.raghavan@example.com',
   resume: '/resume.pdf',
   ogImage: '/og.png',
@@ -26,24 +27,13 @@ export const socials = [
 export const nav = [
   { label: 'Work', href: '/projects' },
   { label: 'About', href: '/about' },
-  { label: 'Journey', href: '/about#timeline' },
   { label: 'Contact', href: '/contact' },
-];
-
-/** Rotating words in the hero headline */
-export const heroRotation = [
-  'embedded systems',
-  'autonomous rovers',
-  'agricultural UAVs',
-  'high-current PCBs',
-  'computer vision',
-  'handheld hardware',
 ];
 
 /** Short factual strip under the hero */
 export const heroStats = [
-  { value: '10+', label: 'Systems built end-to-end' },
-  { value: '3', label: 'Hardware generations shipped' },
+  { value: '10+', label: 'Hardware systems built' },
+  { value: '3', label: 'Console generations shipped' },
   { value: '650mm', label: 'Autonomous UAV platform' },
-  { value: '2', label: 'Leadership positions' },
+  { value: '2', label: 'Advisory positions' },
 ];

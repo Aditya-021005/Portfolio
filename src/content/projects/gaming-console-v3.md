@@ -1,17 +1,17 @@
 ---
-title: Handheld Gaming Console — Generation III
+title: Mini Gaming Console — Generation III
 tagline: Colour TFT, rotary-encoder navigation, and a real embedded UI layer.
 summary: >-
-  The third revision of the console: a colour TFT display driven over SPI, a rotary encoder for
+  The third revision of the mini console: a colour TFT display driven over SPI, a rotary encoder for
   fast menu navigation, and a rebuilt embedded UI with proper menu state management — the point
   where the project stopped being a toy and started being a product.
 year: '2024 — 2025'
 role: Hardware, firmware, UI design
 status: Shipped
 category: Embedded Systems
-featured: true
-order: 3
-series: { name: 'Handheld Console Series', part: 3 }
+featured: false
+order: 4
+series: { name: 'Mini Gaming Consoles', part: 3 }
 tags:
   - Embedded Systems
   - ESP32
@@ -40,7 +40,10 @@ stack:
   tools:
     - Enclosure design & 3D printing
     - Iterative hardware revision
-# cover: /images/gaming-console-v3/hero.jpg
+cover: /images/gaming-console-v3/02.jpg
+gallery:
+  - { src: /images/gaming-console-v3/02.jpg, alt: "Generation III console — colour TFT and rotary encoder", caption: "Top view showing the colour TFT, rotary encoder and joystick", span: normal }
+  - { src: /images/gaming-console-v3/01.jpg, alt: "Generation III console", span: normal }
 ---
 
 ## Overview

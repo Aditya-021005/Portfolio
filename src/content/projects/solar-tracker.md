@@ -9,7 +9,7 @@ year: '2023'
 role: Design, firmware, control
 status: Prototype
 category: Energy
-order: 9
+order: 10
 tags:
   - Renewable Energy
   - Automation

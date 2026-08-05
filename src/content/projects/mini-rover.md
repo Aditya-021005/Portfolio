@@ -9,7 +9,7 @@ year: '2023'
 role: Hardware, firmware, integration
 status: Shipped
 category: Robotics
-order: 7
+order: 8
 tags:
   - ESP32
   - Wi-Fi
@@ -34,7 +34,7 @@ stack:
   tools:
     - Chassis integration
     - Power management
-# cover: /images/mini-rover/hero.jpg
+cover: /images/mini-rover/01.jpg
 ---
 
 ## Overview

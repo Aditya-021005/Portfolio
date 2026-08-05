@@ -9,8 +9,8 @@ year: '2024'
 role: Firmware, PCB design, optical front end
 status: Shipped
 category: Instrumentation
-featured: true
-order: 4
+featured: false
+order: 5
 tags:
   - PCB Design
   - Bare-Metal AVR
@@ -37,7 +37,17 @@ stack:
     - Optical path design
     - Noise reduction techniques
     - Sensor calibration against references
-# cover: /images/igcar-turbidity/hero.jpg
+cover: /images/igcar-turbidity/01.jpg
+# Documentation CTA — drop the report at public/files/igcar-turbidity-report.pdf
+# and uncomment these two lines to show a download button on the project page.
+# downloads:
+#   - { label: "Technical report (PDF)", href: /files/igcar-turbidity-report.pdf, icon: pdf }
+gallery:
+  - { src: /images/igcar-turbidity/01.jpg, alt: "Enclosed turbidity instrument measuring a sample", caption: "Reading 7619 NTU with the optical probe in a beaker", span: wide }
+  - { src: /images/igcar-turbidity/02.jpg, alt: "IGCAR turbidity measurement system", span: normal }
+  - { src: /images/igcar-turbidity/03.jpg, alt: "Turbidity instrument — detail", span: normal }
+  - { src: /images/igcar-turbidity/04.jpg, alt: "Turbidity instrument — detail", span: normal }
+  - { src: /images/igcar-turbidity/05.jpg, alt: "Turbidity instrument — detail", span: normal }
 ---
 
 ## Overview
