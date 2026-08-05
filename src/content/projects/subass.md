@@ -36,7 +36,7 @@ stack:
     - Sensor positioning
     - Interconnect reliability testing
     - Mechanical-electrical integration
-  cover: /images/WhatsApp Image 2026-08-06 at 02.13.49.jpeg
+  cover: /images/SUBASS_01/
 ---
 
 ## Overview
