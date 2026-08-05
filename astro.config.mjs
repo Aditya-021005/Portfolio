@@ -13,9 +13,12 @@ import tailwindcss from '@tailwindcss/vite';
 // ---------------------------------------------------------------------------
 
 export default defineConfig({
-  site: 'https://achyuthanraghavan.com',
+  site: 'https://achyuthan-portfolio.vercel.app',
   base: '/',
   integrations: [mdx(), sitemap()],
+  // Hides the floating dev-only toolbar (inspect / audit / settings) that
+  // Astro overlays at the bottom of the page during `npm run dev`.
+  devToolbar: { enabled: false },
   vite: {
     // Cast: @tailwindcss/vite and Astro resolve slightly different Vite
     // versions, so their Plugin types don't structurally match. Runtime is fine.

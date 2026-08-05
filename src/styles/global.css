@@ -306,51 +306,68 @@ html.no-js [data-reveal] { opacity: 1; transform: none; }
    Every actionable element acknowledges the press: a fast scale-down on
    pointer-down, a ripple originating at the exact contact point, and a
    spring back on release. Short and physical, never bouncy.
+
+   These MUST live inside @layer components. Unlayered CSS outranks every
+   cascade layer, so declaring `position: relative` on `button` outside a
+   layer silently beats Tailwind's `.absolute` utility and knocks every
+   absolutely-positioned button back into normal flow.
    ========================================================================== */
 
-.btn,
-button,
-[role='tab'],
-[data-press] {
-  position: relative;
-  overflow: hidden;
-  transform-origin: center;
-  -webkit-tap-highlight-color: transparent;
-  transition:
-    transform 0.32s var(--ease-out-expo),
-    background-color 0.35s var(--ease-out-expo),
-    border-color 0.35s var(--ease-out-expo),
-    color 0.35s var(--ease-out-expo);
-}
+@layer components {
+  .btn,
+  button,
+  [role='tab'],
+  [data-press] {
+    /* Positioning context for the ripple. A positioning utility on the
+       element (.absolute, .fixed, …) overrides this, which is intended —
+       those are still positioned, so the ripple stays contained. */
+    position: relative;
+    overflow: hidden;
+    transform-origin: center;
+    -webkit-tap-highlight-color: transparent;
+    transition:
+      transform 0.32s var(--ease-out-expo),
+      background-color 0.35s var(--ease-out-expo),
+      border-color 0.35s var(--ease-out-expo),
+      color 0.35s var(--ease-out-expo);
+  }
 
-.btn:active,
-button:active,
-[role='tab']:active,
-[data-press]:active {
-  transform: scale(0.965);
-  transition-duration: 0.08s;
-}
+  .btn:active,
+  button:active,
+  [role='tab']:active,
+  [data-press]:active {
+    transform: scale(0.965);
+    transition-duration: 0.08s;
+  }
 
-/* Cards and other large targets compress less — big surfaces need less travel */
-.press-soft:active,
-a.glass-hover:active {
-  transform: scale(0.992);
-  transition-duration: 0.08s;
-}
+  /* Cards and other large targets compress less — big surfaces need less travel */
+  .press-soft:active,
+  a.glass-hover:active {
+    transform: scale(0.992);
+    transition-duration: 0.08s;
+  }
 
-/* Ripple injected by the global press handler */
-.ripple {
-  position: absolute;
-  top: 0;
-  left: 0;
-  border-radius: 999px;
-  background: currentColor;
-  opacity: 0.22;
-  pointer-events: none;
-  transform: translate(-50%, -50%) scale(0);
-  animation: ripple 0.62s var(--ease-out-expo) forwards;
+  /* Ripple injected by the global press handler */
+  .ripple {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 999px;
+    background: currentColor;
+    opacity: 0.22;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0);
+    animation: ripple 0.62s var(--ease-out-expo) forwards;
+  }
+  .btn-primary .ripple { opacity: 0.14; }
+
+  /* Links that carry an arrow nudge it forward on press as well as hover */
+  .nudge :is(svg) {
+    transition: transform 0.4s var(--ease-out-expo);
+  }
+  .nudge:hover :is(svg) { transform: translateX(3px); }
+  .nudge:active :is(svg) { transform: translateX(6px); }
 }
-.btn-primary .ripple { opacity: 0.14; }
 
 @keyframes ripple {
   to {
@@ -358,13 +375,6 @@ a.glass-hover:active {
     opacity: 0;
   }
 }
-
-/* Links that carry an arrow nudge it forward on press as well as hover */
-.nudge :is(svg) {
-  transition: transform 0.4s var(--ease-out-expo);
-}
-.nudge:hover :is(svg) { transform: translateX(3px); }
-.nudge:active :is(svg) { transform: translateX(6px); }
 
 @media (prefers-reduced-motion: reduce) {
   .ripple { display: none; }
