@@ -4,7 +4,19 @@ import { site, heroStats } from '../data/site';
 ---
 
 <section class="relative flex min-h-[92svh] flex-col justify-between pt-[var(--nav-h)]">
-  <div class="grid-backdrop pointer-events-none absolute inset-0 -z-10" aria-hidden="true"></div>
+  <!-- ---------- Backdrop ----------
+       Collage sits full-bleed behind the whole hero, desaturated + dimmed so
+       it reads as texture rather than a photo. Grid pattern layers on top of
+       it, same as before. -->
+  <div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
+    <img
+      src="/images/gallery.jpg"
+      alt=""
+      class="h-full w-full object-cover opacity-[0.28] grayscale-[0.15]"
+    />
+    <div class="absolute inset-0 bg-[#08090b]/70"></div>
+    <div class="grid-backdrop absolute inset-0"></div>
+  </div>
 
   <!-- ---------- Headline ---------- -->
   <div class="shell flex flex-1 items-center py-16 sm:py-20">
@@ -138,25 +150,5 @@ import { site, heroStats } from '../data/site';
         }
       </dl>
     </div>
-  </div>
-</section>
-
-<!-- ---------- Field gallery ----------
-     A quick visual survey of recent builds — sits below the datasheet-style
-     hero as its own section, rather than inside it, so the hero stays text-led. -->
-<section class="border-t border-[var(--line)]">
-  <div class="shell py-16 sm:py-20">
-    <p class="eyebrow anim-fade-up">In the field</p>
-
-    <img
-      src="/images/gallery.png"
-      alt="Rovers, PCBs, UAVs and embedded builds from recent projects"
-      width="2400"
-      height="951"
-      loading="lazy"
-      decoding="async"
-      class="anim-fade-up mt-6 w-full rounded-2xl border border-[var(--line)]"
-      style="animation-delay:.06s"
-    />
   </div>
 </section>
