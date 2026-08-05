@@ -20,7 +20,7 @@ export const site = {
 
 export const socials = [
   { label: 'GitHub', href: 'https://github.com/Achyu249', icon: 'github' as const },
-  { label: 'LinkedIn', href: 'www.linkedin.com/in/achyuthan-raghavan-8863402b6', icon: 'linkedin' as const },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/achyuthan-raghavan-8863402b6/', icon: 'linkedin' as const },
   { label: 'Email', href: `mailto:${site.email}`, icon: 'mail' as const },
 ];
 
