@@ -36,7 +36,7 @@ stack:
     - Schematic & layout review
     - Bring-up and debug procedure
     - Subsystem documentation
-cover: /images/criss-rover/02.jpg
+cover: /images/criss-rover/05.jpg
 gallery:
   - { src: /images/criss-rover/02.jpg, alt: "CRISS Rover electrical subsystem boards on the bench", caption: "Power distribution board, motor driver boards and the main controller", span: wide }
   - { src: /images/criss-rover/01.jpg, alt: "CRISS Rover electrical hardware", span: normal }
