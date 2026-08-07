@@ -108,30 +108,17 @@ export const skillDomains: SkillDomain[] = [
   },
   {
     key: 'vision',
-    title: 'Computer Vision',
+    title: 'Digital Image Processing',
     icon: 'eye',
     blurb: 'Image pipelines for field data — from raw aerial capture to crop-health inference.',
     items: [
       'Digital Image Processing (DIP)',
-      'OpenCV',
-      'Orthomosaic generation',
       'Crop health analysis',
       'Thermal imaging',
       'Geotagging',
     ],
   },
-  {
-    key: 'embedded',
-    title: 'Embedded Hardware',
-    icon: 'chip',
-    blurb:
-      'Controller-level work across eight-bit AVRs through Jetson-class compute, close to the peripherals.',
-    items: [
-      'ESP32',
-      'ATmega / bare-metal AVR',
-      'Arduino',
-    ],
-  },
+
   {
     key: 'control',
     title: 'Control Systems',
