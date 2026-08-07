@@ -39,11 +39,10 @@ export const skillDomains: SkillDomain[] = [
       'Altium Designer',
       'KiCad',
       'Schematic design',
-      'High-current layout',
       'Power distribution',
       'Signal integrity',
       'Hardware bring-up & debug',
-      'DFM / assembly prep',
+      
     ],
   },
   {
@@ -73,7 +72,7 @@ export const skillDomains: SkillDomain[] = [
       'IMU / GPS / compass integration',
       'Precision frequency measurement',
       'Calibration against references',
-      'Noise reduction techniques',
+      
     ],
   },
   {
@@ -129,13 +128,8 @@ export const skillDomains: SkillDomain[] = [
       'Controller-level work across eight-bit AVRs through Jetson-class compute, close to the peripherals.',
     items: [
       'ESP32',
-      'STM32',
-      'SAMD21',
       'ATmega / bare-metal AVR',
       'Arduino',
-      'TI C2000 LaunchPad',
-      'Jetson Nano',
-      'Jetson Orin Nano',
     ],
   },
   {
@@ -149,7 +143,6 @@ export const skillDomains: SkillDomain[] = [
       'Field-Oriented Control',
       'Feedback sensing',
       'Flight tuning',
-      'MATLAB modelling',
     ],
   },
   {
@@ -161,8 +154,7 @@ export const skillDomains: SkillDomain[] = [
     items: [
       'Autodesk Fusion 360',
       'Component enclosure layout',
-      '3D printing / DFM',
-      'Packaging optimisation',
+      '3D printing',
       'Tolerance & fit',
     ],
   },
@@ -177,7 +169,7 @@ export const skillDomains: SkillDomain[] = [
 
 /** Marquee strip of tool names on the home page */
 export const toolStrip = [
-  'Altium Designer', 'KiCad', 'Fusion 360', 'FOC', 'BLDC / PMSM', 'Inverter debug',
-  'ESP32', 'STM32', 'ATmega', 'Jetson Orin', 'Pixhawk', 'ArduPilot', 'MAVLink',
-  'OpenCV', 'Python', 'C++', 'MATLAB', 'Mission Planner', 'TI C2000', 'BLHeli',
+  'Altium Designer', 'KiCad', 'Fusion 360', 'FOC', 'BLDC', 'Inverter debug',
+  'ESP32', 'ATmega', 'Pixhawk', 'ArduPilot', 'MAVLink',
+   'Python', 'Arduino', 'MATLAB', 'Mission Planner', 'Digital Image Processing'
 ];
