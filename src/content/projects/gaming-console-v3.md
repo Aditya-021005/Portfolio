@@ -10,7 +10,7 @@ role: Hardware, firmware, UI design
 status: Shipped
 category: Embedded Systems
 featured: false
-order: 4
+order: 5
 series: { name: 'Mini Gaming Consoles', part: 3 }
 tags:
   - Embedded Systems
