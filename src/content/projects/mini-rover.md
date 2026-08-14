@@ -6,7 +6,7 @@ summary: >-
   control, embedded firmware and differential-drive behaviour — deliberately designed to be
   reconfigured rather than finished.
 year: '2026'
-role: Hardware, firmware, integration
+role: Hardware, Electronics, integration
 status: In Process
 category: Robotics
 order: 8
