@@ -10,7 +10,7 @@ role: PCB design, Embedded systems, Hardware
 status: Finished (under Testing and Improvement)
 category: Instrumentation
 featured: false
-order: 5
+order: 4
 tags:
   - PCB Design
   - Bare-Metal AVR
