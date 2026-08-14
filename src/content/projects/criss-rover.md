@@ -10,7 +10,7 @@ role: Senior Technical Advisor (ex-Electrical Subsystem Lead / Vice Captain)
 status: In Progress
 category: Robotics
 featured: true
-order: 3
+order: 1
 tags:
   - Robotics
   - Power Electronics
