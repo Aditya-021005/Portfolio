@@ -5,7 +5,7 @@ summary: >-
   Large-scale robotics platform developed with CRISS Robotics, where I serve as Senior Technical
   Advisor — covering the battery management system, power distribution, PCB review, subsystem
   integration, testing and team documentation.
-year: '2025'
+year: '2024 - Present'
 role: Senior Technical Advisor (ex-Electrical Subsystem Lead / Vice Captain)
 status: In Progress
 category: Robotics
