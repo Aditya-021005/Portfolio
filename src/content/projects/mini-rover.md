@@ -5,9 +5,9 @@ summary: >-
   A compact Wi-Fi-enabled rover built as a modular platform for experimenting with wireless
   control, embedded firmware and differential-drive behaviour — deliberately designed to be
   reconfigured rather than finished.
-year: '2023'
+year: '2026'
 role: Hardware, firmware, integration
-status: Shipped
+status: In Process
 category: Robotics
 order: 8
 tags:
