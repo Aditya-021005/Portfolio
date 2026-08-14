@@ -5,9 +5,9 @@ summary: >-
   A mechanical redesign of the mini console: a magnetic snap-fit enclosure, relocated battery
   that eliminated the Gen I bulge, cleaner internal wiring and a noticeably thinner, better
   balanced device.
-year: '2024'
+year: '2025'
 role: Mechanical design, packaging, assembly
-status: Shipped
+status: Prototype
 category: Embedded Systems
 order: 6
 series: { name: 'Mini Gaming Consoles', part: 2 }
@@ -24,7 +24,7 @@ stack:
   hardware:
     - ESP32
     - 128×64 OLED display
-    - Li-ion battery + TP4056 charging
+    - Li-ion battery(600mah) + TP4056 charging
     - Analog joystick and push buttons
     - Dual vibration motors
     - Magnets for enclosure retention
@@ -70,8 +70,7 @@ is what removed the wasted volume.
 
 ### The battery bulge
 
-The Gen I bulge came from stacking the cell behind the PCB. Gen II relocates it into the volume
-alongside the board that was previously dead space, which flattened the rear shell and moved mass
+The Gen I bulge came from stacking the cell behind the PCB. Gen II uses a smaller, lower capacity lithium ion battery that fits under the esp32 and occupies no extra space, which flattened the rear shell and moved mass
 towards the grips — better balance as a side effect of a thickness fix.
 
 ### Magnetic snap-fit
@@ -84,15 +83,6 @@ debugging — which matters enormously on a device you are still developing firm
 
 Gen I's point-to-point wiring was the main assembly risk. Gen II routed harnesses along defined
 paths with clearance designed in, rather than letting wires find their own way.
-
-## Challenges
-
-**Print tolerance versus magnet fit.** Magnet pockets that are correct in CAD are a press-fit or a
-loose fit in reality depending on the printer. Resolved by iterating test coupons rather than
-reprinting whole shells.
-
-**Ergonomics is a physical question.** Grip comfort could not be evaluated in CAD. Several printed
-iterations were needed to get thickness and edge radii to something that felt right in the hand.
 
 ## Engineering focus
 
