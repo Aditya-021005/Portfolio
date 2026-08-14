@@ -5,9 +5,9 @@ summary: >-
   The first mini console: an ESP32 driving a 128×64 OLED, with a joystick, buttons, dual
   vibration motors and Li-ion charging — plus three original games written from scratch with enemy
   AI, collision detection and full game-state handling.
-year: '2023 — 2024'
+year: '2025'
 role: Hardware, firmware, game development
-status: Shipped
+status: Prototype
 category: Embedded Systems
 order: 7
 series: { name: 'Mini Gaming Consoles', part: 1 }
@@ -24,7 +24,7 @@ stack:
   hardware:
     - ESP32 microcontroller
     - 128×64 OLED display
-    - Rechargeable Li-ion battery
+    - Rechargeable Li-ion battery (18650)
     - TP4056 charging module
     - Analog joystick
     - Push buttons
