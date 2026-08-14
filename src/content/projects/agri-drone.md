@@ -5,7 +5,7 @@ summary: >-
   A complete autonomous agricultural UAV built for precision farming and field surveying —
   airframe selection, propulsion sizing, power budgeting, ArduPilot configuration and a custom
   ground-station GUI for live telemetry, mission control and logging.
-year: '2025'
+year: '2026'
 role: Systems design, build, flight tuning, GUI development
 status: In Progress
 category: UAV
