@@ -52,8 +52,6 @@ that can stay on task indefinitely as long as the ground station has charged pac
 
 ## Problem statement
 
-Battery swapping sounds mechanical, but the difficult requirements are electrical and positional:
-
 - The aircraft never lands in exactly the same place twice, so the dock has to **tolerate and
   correct for misalignment** rather than assume precision.
 - A power interface that is mated and unmated on every cycle has to stay reliable across
@@ -64,7 +62,7 @@ Battery swapping sounds mechanical, but the difficult requirements are electrica
 
 ## Contributions
 
-My work on the project covers three areas:
+My work on the project will cover three areas:
 
 ### Battery dock power management
 
@@ -98,7 +96,7 @@ mechanism.
 
 ## Current status
 
-Active development. The system architecture and the contribution areas above are in progress;
+Ideation Stage. The system architecture and the contribution areas above are in progress;
 this page will be expanded with hardware detail, test results and imagery as the build matures.
 
 ## Future work
