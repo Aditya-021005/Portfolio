@@ -5,9 +5,9 @@ summary: >-
   The third revision of the mini console: a colour TFT display driven over SPI, a rotary encoder for
   fast menu navigation, and a rebuilt embedded UI with proper menu state management — the point
   where the project stopped being a toy and started being a product.
-year: '2024 — 2025'
-role: Hardware, firmware, UI design
-status: Shipped
+year: '2026'
+role: Hardware
+status: Prototype
 category: Embedded Systems
 featured: false
 order: 5
@@ -16,7 +16,6 @@ tags:
   - Embedded Systems
   - ESP32
   - TFT / SPI Graphics
-  - HMI
   - Product Design
 highlights:
   - { value: 'Gen 3', label: 'Hardware revision' }
@@ -28,8 +27,8 @@ stack:
     - Colour TFT display (SPI)
     - Rotary encoder
     - Analog joystick
-    - Push buttons
-    - Li-ion battery + TP4056 charging
+    - Capacitive Touch Sensor
+    - Li-ion battery (18650)(3000mah) + TP4056 charging
     - Vibration motors
   software:
     - Embedded C++ / Arduino framework
@@ -60,20 +59,11 @@ show, it made menus feel cramped, and every new game meant hand-rolling another 
 Navigation via joystick was also imprecise for list selection — a joystick is a great analog input
 and a poor menu control.
 
-## Design process
-
-### Display
-
-Moving to a colour TFT over SPI changed the software problem entirely. An OLED at 128×64 can be
-redrawn wholesale every frame; a colour TFT cannot, not at a frame rate that feels good. That
-forced a proper approach to drawing — updating only what changed, and thinking about the SPI
-bandwidth budget as a real constraint.
-
 ### Input
 
 The rotary encoder was added specifically for menu navigation: detent-per-item selection with a
 push-to-confirm, which is dramatically faster and more precise than nudging a joystick through a
-list. The joystick and buttons were retained for gameplay, so each input does what it is actually
+list. The joystick and capacitive touch sensor were retained for gameplay, so each input does what it is actually
 good at.
 
 ### Software architecture
@@ -88,21 +78,9 @@ The UI was rebuilt as a **menu state machine** sitting above the game loop:
 This is the change that made adding a new game a matter of writing the game, rather than writing
 the game plus its entire screen furniture.
 
-## Challenges
-
-**SPI bandwidth.** A full-screen redraw at colour depth is expensive. Partial redraws and dirty
-regions were necessary rather than optional.
-
-**Encoder debouncing.** Mechanical encoders bounce, and a naive read gives phantom steps. Handled
-in firmware with state-based decoding rather than simple edge counting.
-
-**Input coexistence.** Three input devices (encoder, joystick, buttons) sharing one event pipeline
-needed a clear ownership model per UI state, or inputs fight each other.
-
 ## Skills demonstrated
 
-- TFT display drivers and SPI graphics
-- Embedded UI design and menu systems
+- AI assisted Embedded UI design and menu systems
 - Human–machine interface design on constrained hardware
 - Iterative product development across three hardware generations
 
