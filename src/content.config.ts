@@ -50,7 +50,14 @@ const projects = defineCollection({
     year: z.string(),
     /** Your role on the project */
     role: z.string().default(''),
-    status: z.enum(['Shipped', 'In Progress', 'Prototype', 'Concept', 'Archived']).default('Shipped'),
+    /**
+     * Free-form so you can describe a project honestly without the build
+     * rejecting the wording. Common values: Shipped, In Progress, Prototype,
+     * Concept, Archived — but anything short is fine, e.g.
+     * "Finished (under testing and improvement)". Keep it brief: it renders
+     * as a chip next to the category and year.
+     */
+    status: z.string().default('Shipped'),
     /** Grouping used by the filter bar on /projects */
     category: z.enum([
       'Embedded Systems',

@@ -242,7 +242,10 @@
     font-size: 0.6875rem;
     letter-spacing: 0.04em;
     color: var(--color-fg-muted);
-    white-space: nowrap;
+    /* Wraps rather than overflowing when a label is long — e.g. a descriptive
+       project status. Short chips still sit on one line. */
+    max-width: 100%;
+    overflow-wrap: anywhere;
   }
   .chip-accent {
     border-color: color-mix(in oklab, var(--color-cyan-neon) 40%, transparent);
