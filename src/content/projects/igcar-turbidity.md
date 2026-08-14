@@ -35,8 +35,8 @@ stack:
 cover: /images/igcar-turbidity/01.jpg
 # Documentation CTA — drop the report at public/files/igcar-turbidity-report.pdf
 # and uncomment these two lines to show a download button on the project page.
-#downloads:
-# - { label: "Technical report (PDF)", href: /PS-1 Final Report - Achyuthan Raghavan.pdf, icon: pdf }
+downloads:
+- { label: "Technical report (PDF)", href: /PS-1 Final Report - Achyuthan Raghavan.pdf, icon: pdf }
 gallery:
   - { src: /images/igcar-turbidity/01.jpg, alt: "Enclosed turbidity instrument measuring a sample", caption: "Reading 7619 NTU with the optical probe in a beaker", span: wide }
   - { src: /images/igcar-turbidity/02.jpg, alt: "IGCAR turbidity measurement system", span: normal }
