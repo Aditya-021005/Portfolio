@@ -53,7 +53,7 @@ cover: /images/agri-drone/01.jpg
 
 ## Overview
 
-This is the most complete system I've built: an autonomous multirotor designed specifically for
+An autonomous multirotor designed specifically for
 precision agriculture — field surveying, repeatable flight lines over crops, and a data pipeline
 that turns those flights into something an agronomist can act on.
 
@@ -83,20 +83,6 @@ That drove the chain backwards:
 - **Propellers** — 15-inch carbon fibre, for efficiency at the hover RPM the low-KV motors want.
 - **ESCs** — ReadyToSky 45 A BLHeli, chosen with headroom above the motors' continuous draw.
 - **Battery** — 6S 10000 mAh LiPo, balancing endurance against the mass penalty of the pack.
-
-### Power budgeting
-
-The pack has to feed more than the motors: flight controller, GPS, telemetry radio, FPV camera and
-the gimbal all draw from the same source. I budgeted each rail separately and sized the
-distribution board and wiring for the motor current, not the average current — the peaks during an
-aggressive correction are what melt connectors.
-
-### Centre of gravity
-
-On a foldable frame with a gimbal hanging below the nose, CG is not automatic. Battery position
-was chosen to bring the CG onto the geometric centre with the payload fitted, then re-checked
-after every hardware change. A drone that trims itself level in hover is a drone that isn't
-burning current fighting its own layout.
 
 ## Firmware & configuration
 
@@ -129,28 +115,6 @@ station over MAVLink:
 
 The design goal was that an operator should be able to answer "is this survey going correctly?"
 without reading a single number twice.
-
-## Challenges
-
-**Vibration into the IMU.** Large props on a foldable frame put real vibration into the flight
-controller. Resolved with damped controller mounting and by balancing props before flight —
-visible in the logs as a tightening of the accelerometer traces.
-
-**Compass interference.** High motor currents running near the GPS/compass mast skew heading.
-Fixed by routing high-current leads away from the mast and re-running the compass calibration in
-place, with the full payload fitted.
-
-**Endurance versus payload.** Every gram of camera and gimbal is endurance spent. This is a
-straight trade, and the honest answer was to fix the mission length first and let that constrain
-the payload — not the other way round.
-
-## Lessons learned
-
-- Size the propulsion system on paper before ordering anything. Every component after the motor
-  choice is downstream of it.
-- Failsafes are a design input, not a settings screen you fill in at the end.
-- A ground station earns its keep the first time it tells you something is wrong *before* the
-  airframe does.
 
 ## Future improvements
 
