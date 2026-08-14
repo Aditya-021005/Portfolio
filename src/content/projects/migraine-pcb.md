@@ -5,7 +5,7 @@ summary: >-
   A freelance hardware engineering commission: schematic capture and compact PCB layout for a
   wearable migraine-reduction device, where the binding constraint was fitting a complete circuit
   into a form factor someone would actually wear.
-year: '2024'
+year: '2026'
 role: Freelance hardware engineer
 status: Shipped
 category: PCB Design
