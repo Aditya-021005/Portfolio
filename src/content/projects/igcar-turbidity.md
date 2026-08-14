@@ -33,16 +33,12 @@ stack:
     - Noise reduction techniques
     - Sensor calibration against references
 cover: /images/igcar-turbidity/01.jpg
-# Documentation CTA — drop the report at public/files/igcar-turbidity-report.pdf
-# and uncomment these two lines to show a download button on the project page.
-#downloads:
-# - { label: "Technical report (PDF)", href: /PS-1 Final Report - Achyuthan Raghavan.pdf, icon: pdf }
 gallery:
   - { src: /images/igcar-turbidity/01.jpg, alt: "Enclosed turbidity instrument measuring a sample", caption: "Reading 7619 NTU with the optical probe in a beaker", span: wide }
   - { src: /images/igcar-turbidity/02.jpg, alt: "IGCAR turbidity measurement system", span: normal }
-  - { src: /images/igcar-turbidity/03.jpg, alt: "Turbidity instrument — detail", span: normal }
-  - { src: /images/igcar-turbidity/04.jpg, alt: "Turbidity instrument — detail", span: normal }
-  - { src: /images/igcar-turbidity/05.jpg, alt: "Turbidity instrument — detail", span: normal }
+  - { src: /images/igcar-turbidity/03.jpg, alt: "Turbidity instrument - detail", span: normal }
+  - { src: /images/igcar-turbidity/04.jpg, alt: "Turbidity instrument - detail", span: normal }
+  - { src: /images/igcar-turbidity/05.jpg, alt: "Turbidity instrument - detail", span: normal }
 ---
 
 ## Overview
@@ -51,17 +47,17 @@ Turbidity — the cloudiness of a fluid caused by suspended particles — is mea
 a known light through a sample and measure how much makes it to a detector. Doing that *accurately*
 is an exercise in controlling everything except the thing you're measuring.
 
-This instrument was developed at IGCAR (Indira Gandhi Centre for Atomic Research) around a bare-metal ATmega, a custom PCB, and a TSL235R
-light-to-frequency converter paired with a LED emitter.
+This instrument was developed at IGCAR (Indira Gandhi Centre for Atomic Research) around a bare-metal
+ATmega, a custom PCB, and a TSL235R light-to-frequency converter paired with an LED emitter.
 
 ## Problem statement
 
 The measurement is only as good as its weakest link, and there are several candidates: LED output
 drift, ambient light leaking into the optical path, detector noise, supply ripple modulating the
-emitter, and timing error in the frequency measurement itself. The design had to attack all of
-them. 
+emitter, and timing error in the frequency measurement itself. The design had to attack all of them.
 
-The turbidity sensor is required to monitor the purity of the water in the boilers of the nuclear plant, even a small amount of impurities could cause major issues to the equipment.
+The turbidity sensor is required to monitor the purity of the water in the boilers of the nuclear
+plant. Even a small amount of impurities could cause major issues for the equipment.
 
 ## Why light-to-frequency
 
