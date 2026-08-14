@@ -5,8 +5,8 @@ summary: >-
   An automated solar tracking system that continuously orients photovoltaic panels toward the sun
   to maximise energy capture — a closed-loop control problem where the power spent tracking has to
   stay well below the power gained.
-year: '2023'
-role: Design, firmware, control
+year: '2025'
+role: Design, control
 status: Prototype
 category: Energy
 order: 10
@@ -22,16 +22,14 @@ highlights:
 stack:
   hardware:
     - Microcontroller
-    - Servo / stepper actuators
+    - Servo actuators
     - LDR light sensors
-    - Motor drivers
     - Photovoltaic panel
     - Rechargeable battery
   software:
-    - Embedded C / C++
+    - Arduino/C++
     - Differential sensing algorithm
     - Closed-loop positioning
-    - Deadband and hysteresis logic
   tools:
     - Sensor interfacing
     - Control loop tuning
@@ -46,7 +44,7 @@ sun and captures meaningfully more energy — provided the tracking mechanism do
 gains moving itself.
 
 This project built an automated tracker that orients a photovoltaic panel toward the sun
-throughout the day using **differential light sensing** and a closed control loop.
+throughout the day using **light sensing** using LDRsand a closed control loop.
 
 ## Objectives
 
@@ -107,6 +105,5 @@ differ, and the loop can chase the slop. Handled by making the deadband wider th
 
 ## Future improvements
 
-- Dual-axis tracking for seasonal elevation as well as daily azimuth
 - Logging to quantify the actual yield improvement against a fixed reference panel
 - A night-time park position and a wind stow mode
