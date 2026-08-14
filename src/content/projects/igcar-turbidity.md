@@ -17,7 +17,7 @@ tags:
   - Sensor Instrumentation
   - Environmental Monitoring
 highlights:
-  - { value: 'Bare-metal', label: 'No framework, no HAL' }
+  - { value: 'Bare-metal', label: 'Atmega 2560' }
   - { value: 'TSL235R', label: 'Light-to-frequency sensor' }
   - { value: 'Custom', label: 'PCB and optical path' }
 stack:
