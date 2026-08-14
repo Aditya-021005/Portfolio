@@ -5,8 +5,8 @@ summary: >-
   A custom embedded turbidity measurement system for fluid analysis, built around a bare-metal
   ATmega microcontroller and a purpose-designed PCB with a TSL235R light-to-frequency sensor and
   precision LED emitter.
-year: '2024'
-role: Firmware, PCB design, optical front end
+year: '2025'
+role: PCB design, Embedded systems, Hardware 
 status: Finished (under Testing and Improvement)
 category: Instrumentation
 featured: false
