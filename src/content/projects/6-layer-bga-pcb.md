@@ -7,7 +7,7 @@ tags: [PCB Design, BGA, KiCad, STM32, HDI, Embedded Systems]
 role: Hardware / PCB Design
 status: In Development
 featured: true
-order: 4
+order: 3
 cover: /images/3DView.jpg
 highlights:
   - { value: '30 × 30 mm', label: 'Form factor' }
