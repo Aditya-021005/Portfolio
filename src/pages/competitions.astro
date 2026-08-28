@@ -1,0 +1,287 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Section from '../components/Section.astro';
+import Icon from '../components/Icon.astro';
+
+const competitions = [
+  {
+    number: '01',
+    title: 'Robofest Gujarat 5.0',
+    year: '2025 / 2026',
+    type: 'Robotics Competition',
+    disciplines: 'Autonomous Systems - Embedded Systems',
+    body: [
+      'Participated as part of a robotics development team, working on the design and integration of an autonomous robotic system. The competition involved applying robotics, embedded electronics, sensing, control and software to solve a real-world challenge under time and performance constraints.',
+      'My involvement focused on electronics integration, embedded control, sensor interfacing and troubleshooting. The experience provided hands-on exposure to developing and testing a robotic platform in a competitive environment where reliability and rapid iteration were critical.',
+    ],
+    focus: 'Robotics - Embedded Systems - Sensors - Control - System Integration',
+    image: '/images/robofest-gujarat-5/01.jpg',
+    gallery: [
+      { src: '/images/robofest-gujarat-5/02.jpg', alt: 'Robofest robot during outdoor testing', caption: 'Outdoor testing during the Robofest grand finale.', span: 'wide' as const },
+      { src: '/images/robofest-gujarat-5/03.jpg', alt: 'Robofest robot control board', caption: 'Integrated control board and power electronics.', span: 'normal' as const },
+      { src: '/images/robofest-gujarat-5/04.jpg', alt: 'Robofest team with the robot', caption: 'The team with the completed robotic platform.', span: 'wide' as const },
+      { src: '/images/robofest-gujarat-5/05.jpg', alt: 'Close-up of the Robofest robot arm', caption: 'Manipulator and chassis integration.', span: 'normal' as const },
+      { src: '/images/robofest-gujarat-5/06.jpg', alt: 'Robofest robot during field operation', caption: 'The robot prepared for field operation.', span: 'tall' as const },
+    ],
+  },
+  {
+    number: '02',
+    title: 'Australian Rover Challenge (ARCh)',
+    year: '2026',
+    type: 'Rover Competition',
+    disciplines: 'Autonomous Robotics - Systems Engineering',
+    body: [
+      'Participated in the Australian Rover Challenge 2026, working on the development of a planetary-style rover designed to operate across challenging terrain and complete competition-specific tasks.',
+      'The project required integrating mechanical, electrical, embedded and software subsystems into one reliable robotic platform. Work involved contributing to rover electronics, subsystem integration, control and testing while considering power consumption, communication, mobility and uncertain environments.',
+    ],
+    focus: 'Autonomous Rovers - Embedded Systems - Electrical Integration - Robotics - Systems Engineering',
+  },
+  {
+    number: '03',
+    title: 'IRC Manipal',
+    year: '2026',
+    type: 'International Rover Challenge',
+    disciplines: 'Rover Design - Robotics',
+    body: [
+      'Participated as part of a multidisciplinary rover development team. The competition involved designing and developing a rover capable of performing autonomous and manually controlled tasks within strict mechanical, electrical and operational constraints.',
+      "The project involved working across the rover's electrical and embedded systems, including subsystem integration, power distribution, sensors, actuators, communication and control. Extensive testing and troubleshooting were required to ensure the rover operated reliably as an integrated platform.",
+    ],
+    focus: 'Rover Robotics - Electronics - Embedded Systems - Power Systems - Control',
+  },
+  {
+    number: '04',
+    title: 'International Rover Challenge (IRC) Goa',
+    year: '2025',
+    type: 'Rover Competition',
+    disciplines: 'Robotics - Embedded Systems',
+    body: [
+      'Participated in the International Rover Challenge in Goa as part of a multidisciplinary robotics team developing a competitive planetary rover.',
+      'The project involved integrating mechanical, electrical and software subsystems into a mobile robotic platform capable of navigating challenging environments and completing competition tasks. Working under competition deadlines required rapid prototyping, hardware debugging, subsystem testing and close coordination between engineering teams.',
+    ],
+    focus: 'Robotics - Rover Systems - Embedded Electronics - Power Distribution - System Integration',
+  },
+  {
+    number: '05',
+    title: 'International Rover Design Challenge',
+    year: '2025',
+    type: 'Rover Design',
+    disciplines: 'Mechanical & Electrical Systems - Autonomous Robotics',
+    body: [
+      'Participated in the International Rover Design Challenge 2025, focusing on the conceptualization and engineering of a planetary rover platform.',
+      'The challenge emphasized designing a rover around realistic operational requirements, including mobility, power, communication, sensing, control and mission objectives. The design process translated mission requirements into practical subsystem architectures while balancing performance, reliability, weight and complexity.',
+    ],
+    focus: 'Rover Design - Systems Engineering - Robotics - Power - Embedded Systems',
+  },
+];
+---
+
+<BaseLayout
+  title="Competitions"
+  description="Robotics competitions and rover development work across autonomous systems, embedded electronics and systems engineering."
+>
+  <header class="relative overflow-hidden pb-16 pt-2 sm:pb-24 sm:pt-6">
+    <div class="grid-backdrop pointer-events-none absolute inset-0" aria-hidden="true"></div>
+    <div class="shell relative">
+      <p class="eyebrow anim-fade-up">Competitions</p>
+      <h1
+        class="display anim-fade-up mt-5 max-w-4xl text-[clamp(2.25rem,6.5vw,4.25rem)]"
+        style="animation-delay:.08s"
+      >
+        Building for the moment
+        <span class="text-gradient">the field gets difficult.</span>
+      </h1>
+      <p class="anim-fade-up mt-8 max-w-2xl text-lg leading-relaxed text-fg-muted" style="animation-delay:.16s">
+        Competition environments turn separate engineering disciplines into one question: does the
+        system work when it matters? These projects taught me to design, test and integrate for that
+        question.
+      </p>
+    </div>
+  </header>
+
+  <Section
+    id="competition-list"
+    eyebrow="Field record"
+    title="Robotics under constraint."
+    lead="A selection of rover and autonomous systems competitions, with the engineering work that happened behind the final platform."
+  >
+    <div class="space-y-6">
+      {
+        competitions.map((competition, index) => (
+          <article
+            class="glass glass-hover overflow-hidden rounded-[var(--radius-card)]"
+            data-reveal
+            style={`--reveal-delay:${index * 70}ms`}
+          >
+            <div class="grid lg:grid-cols-[minmax(15rem,0.7fr)_minmax(0,1.3fr)]">
+              <div
+                class="relative flex aspect-[16/9] min-h-52 items-end overflow-hidden border-b border-[var(--line)] bg-ink p-6 lg:aspect-auto lg:min-h-full lg:border-b-0 lg:border-r"
+              >
+                {
+                  competition.image ? (
+                    <img
+                      src={competition.image}
+                      alt={`${competition.title} competition photograph`}
+                      loading={index === 0 ? 'eager' : 'lazy'}
+                      decoding="async"
+                      class="absolute inset-0 size-full object-cover"
+                    />
+                  ) : (
+                    <>
+                      <div class="grid-backdrop pointer-events-none absolute inset-0 opacity-70" aria-hidden="true"></div>
+                      <div class="absolute right-6 top-6 font-mono text-[0.65rem] tracking-[0.2em] text-fg-faint">
+                        IMAGE / PLACEHOLDER
+                      </div>
+                      <div class="relative">
+                        <p class="font-mono text-5xl tracking-[-0.06em] text-cyan-soft/80">{competition.number}</p>
+                        <p class="mt-3 max-w-[13rem] text-xs uppercase tracking-[0.16em] text-fg-faint">
+                          Replace with competition image
+                        </p>
+                      </div>
+                    </>
+                  )
+                }
+                <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-void/75 via-transparent to-transparent"></div>
+                <p class="relative font-mono text-xs tracking-[0.16em] text-white/75">ROBOfEST / FIELD RECORD</p>
+              </div>
+
+              <div class="p-6 sm:p-8 lg:p-10">
+                <div class="flex flex-wrap items-start justify-between gap-4">
+                  <div>
+                    <p class="eyebrow">{competition.type}</p>
+                    <h2 class="display mt-3 text-2xl sm:text-3xl">{competition.title}</h2>
+                  </div>
+                  <span class="font-mono text-xs text-cyan-soft">{competition.year}</span>
+                </div>
+
+                <p class="mt-5 text-sm uppercase tracking-[0.1em] text-fg-faint">{competition.disciplines}</p>
+
+                <div class="mt-7 space-y-4 text-sm leading-relaxed text-fg-muted">
+                  {competition.body.map((paragraph) => <p>{paragraph}</p>)}
+                </div>
+
+                <div class="mt-8 flex gap-3 border-t border-[var(--line)] pt-6">
+                  <Icon name="arrowRight" class="mt-0.5 size-4 shrink-0 text-cyan-neon" />
+                  <p class="text-sm leading-relaxed text-fg-muted"><strong class="font-medium text-fg">Focus:</strong> {competition.focus}</p>
+                </div>
+
+                {
+                  competition.gallery && (
+                    <div id="robofest-slideshow" class="mt-8" data-slideshow>
+                      <div class="relative overflow-hidden rounded-[var(--radius-card)] border border-[var(--line)] bg-void touch-pan-y" aria-live="polite">
+                        <div class="aspect-[16/9]">
+                          {
+                            competition.gallery.map((image, imageIndex) => (
+                              <figure class:list={['relative size-full', imageIndex === 0 ? '' : 'hidden']} data-slide={imageIndex}>
+                                <img
+                                  src={image.src}
+                                  alt={image.alt}
+                                  loading="lazy"
+                                  decoding="async"
+                                  class="size-full object-contain"
+                                />
+                              </figure>
+                            ))
+                          }
+                        </div>
+                        <button
+                          type="button"
+                          class="absolute left-3 top-1/2 grid size-10 -translate-y-1/2 place-items-center rounded-full border border-[var(--line-strong)] bg-void/75 text-fg backdrop-blur-md transition-colors hover:border-cyan-neon/60"
+                          data-slide-prev
+                          aria-label="Previous Robofest image"
+                        >
+                          <Icon name="arrowLeft" class="size-4" />
+                        </button>
+                        <button
+                          type="button"
+                          class="absolute right-3 top-1/2 grid size-10 -translate-y-1/2 place-items-center rounded-full border border-[var(--line-strong)] bg-void/75 text-fg backdrop-blur-md transition-colors hover:border-cyan-neon/60"
+                          data-slide-next
+                          aria-label="Next Robofest image"
+                        >
+                          <Icon name="arrowRight" class="size-4" />
+                        </button>
+                        <div class="absolute inset-x-0 bottom-0 flex items-center justify-between gap-4 bg-gradient-to-t from-void/90 to-transparent px-4 pb-4 pt-10">
+                          <p class="min-w-0 text-xs text-fg-muted" data-slide-caption>{competition.gallery[0].caption}</p>
+                          <p class="shrink-0 font-mono text-[0.65rem] text-fg-faint"><span data-slide-current>1</span> / {competition.gallery.length}</p>
+                        </div>
+                      </div>
+                      <div class="mt-3 flex justify-center gap-2" aria-label="Robofest image slides">
+                        {
+                          competition.gallery.map((_, imageIndex) => (
+                            <button
+                              type="button"
+                              class:list={['size-2 rounded-full border border-fg-faint transition-colors', imageIndex === 0 ? 'bg-cyan-neon' : 'bg-transparent']}
+                              data-slide-dot={imageIndex}
+                              aria-label={`Show Robofest image ${imageIndex + 1}`}
+                              aria-current={imageIndex === 0 ? 'true' : undefined}
+                            />
+                          ))
+                        }
+                      </div>
+                    </div>
+                  )
+                }
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </Section>
+</BaseLayout>
+
+<script is:inline>
+  (() => {
+    const slideshow = document.querySelector('[data-slideshow]');
+    if (!slideshow) return;
+
+    const slides = Array.from(slideshow.querySelectorAll('[data-slide]'));
+    const dots = Array.from(slideshow.querySelectorAll('[data-slide-dot]'));
+    const caption = slideshow.querySelector('[data-slide-caption]');
+    const current = slideshow.querySelector('[data-slide-current]');
+    let active = 0;
+
+    const show = (index) => {
+      active = (index + slides.length) % slides.length;
+      slides.forEach((slide, slideIndex) => slide.classList.toggle('hidden', slideIndex !== active));
+      dots.forEach((dot, dotIndex) => {
+        dot.classList.toggle('bg-cyan-neon', dotIndex === active);
+        dot.classList.toggle('bg-transparent', dotIndex !== active);
+        dot.setAttribute('aria-current', dotIndex === active ? 'true' : 'false');
+      });
+      const activeImage = slides[active]?.querySelector('img');
+      if (caption && activeImage) caption.textContent = activeImage.alt;
+      if (current) current.textContent = String(active + 1);
+    };
+
+    slideshow.querySelector('[data-slide-prev]')?.addEventListener('click', () => show(active - 1));
+    slideshow.querySelector('[data-slide-next]')?.addEventListener('click', () => show(active + 1));
+    dots.forEach((dot, dotIndex) => dot.addEventListener('click', () => show(dotIndex)));
+
+    let timer = window.setInterval(() => show(active + 1), 4500);
+    const restart = () => {
+      window.clearInterval(timer);
+      timer = window.setInterval(() => show(active + 1), 4500);
+    };
+    const supportsHover = window.matchMedia('(hover: hover)').matches;
+    if (supportsHover) {
+      slideshow.addEventListener('mouseenter', () => window.clearInterval(timer));
+      slideshow.addEventListener('mouseleave', restart);
+    }
+    slideshow.addEventListener('focusin', () => window.clearInterval(timer));
+    slideshow.addEventListener('focusout', (event) => {
+      if (!slideshow.contains(event.relatedTarget)) restart();
+    });
+
+    let touchStartX = 0;
+    slideshow.addEventListener('touchstart', (event) => {
+      touchStartX = event.changedTouches[0]?.clientX ?? 0;
+      window.clearInterval(timer);
+    }, { passive: true });
+    slideshow.addEventListener('touchend', (event) => {
+      const touchEndX = event.changedTouches[0]?.clientX ?? touchStartX;
+      const distance = touchEndX - touchStartX;
+      if (Math.abs(distance) > 45) show(active + (distance < 0 ? 1 : -1));
+      restart();
+    }, { passive: true });
+  })();
+</script>

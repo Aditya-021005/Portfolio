@@ -26,6 +26,7 @@ export const socials = [
 
 export const nav = [
   { label: 'Work', href: '/projects' },
+  { label: 'Competitions', href: '/competitions' },
   { label: 'About', href: '/about' },
   { label: 'Contact', href: '/contact' },
 ];
