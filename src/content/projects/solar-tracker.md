@@ -34,7 +34,7 @@ stack:
     - Sensor interfacing
     - Control loop tuning
     - Power budgeting
-# cover: /images/solar-tracker/hero.jpg
+ cover: /images/solar.jpg
 ---
 
 ## Overview
