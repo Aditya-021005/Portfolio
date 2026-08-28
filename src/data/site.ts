@@ -14,7 +14,7 @@ export const site = {
   location: 'India',
   url: 'https://achyuthan-portfolio.vercel.app',
   email: 'achyuthanraghavan26@gmail.com',
-  resume: '/Resume-Achyuthan_Raghavan.pdf',
+  resume: '/Achyuthan_Raghavan_Resume_OnePage.pdf',
   ogImage: '/og.png',
 };
 
