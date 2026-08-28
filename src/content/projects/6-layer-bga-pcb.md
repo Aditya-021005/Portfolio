@@ -10,19 +10,28 @@ featured: true
 order: 4
 cover: /images/3DView.jpg
 highlights:
-  - 30 × 30 mm form factor
-  - 6-layer PCB architecture
-  - BGA MCU
-  - High-density routing
-  - USB 2.0
-  - SWD debugging
+  - { value: '30 × 30 mm', label: 'Form factor' }
+  - { value: '6-layer', label: 'PCB architecture' }
+  - { value: 'BGA', label: 'MCU package' }
+  - { value: 'HDI', label: 'Routing approach' }
+  - { value: 'USB 2.0', label: 'High-speed interface' }
+  - { value: 'SWD', label: 'Debug interface' }
 stack:
-  - KiCad
-  - STM32
-  - LSM6DS3TR-C
-  - SPI NOR Flash
-  - USB-C
-  - SWD
+  hardware:
+    - STM32 BGA microcontroller
+    - LSM6DS3TR-C 6-axis IMU
+    - SPI NOR Flash
+    - USB-C interface
+    - Tag-Connect SWD interface
+  software:
+    - Embedded firmware
+    - SPI sensor and flash interfaces
+    - USB 2.0 interface
+  tools:
+    - KiCad
+    - BGA escape routing
+    - Multilayer PCB design
+    - Design-rule checking
 gallery:
   - { src: /images/schematic.jpg, alt: "PCB schematic", caption: "System schematic", span: wide }
   - { src: /images/PCB2.png, alt: "PCB front layout", caption: "Top-layer PCB layout", span: wide }
