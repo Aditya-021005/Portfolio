@@ -9,7 +9,7 @@ role: Power management, sensor alignment, mechanical-electrical interconnect
 status: In Progress
 category: Robotics
 featured: true
-order: 3
+order: 4
 tags:
   - Robotics
   - Mechatronics
