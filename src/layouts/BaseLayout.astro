@@ -57,7 +57,27 @@ const ogImage = new URL(image, Astro.site ?? site.url).toString();
     />
 
     <script is:inline>
-      document.documentElement.classList.remove('no-js');
+      (() => {
+        document.documentElement.classList.remove('no-js');
+
+        const resetScrollTop = () => {
+          if (window.location.hash) return;
+          requestAnimationFrame(() => {
+            window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+          });
+        };
+
+        if ('scrollRestoration' in history) {
+          history.scrollRestoration = 'manual';
+        }
+
+        window.addEventListener('beforeunload', () => window.scrollTo(0, 0));
+        window.addEventListener('load', resetScrollTop, { once: true });
+        window.addEventListener('pageshow', resetScrollTop);
+        document.addEventListener('astro:page-load', resetScrollTop);
+        document.addEventListener('astro:after-swap', resetScrollTop);
+        resetScrollTop();
+      })();
     </script>
     <slot name="head" />
   </head>

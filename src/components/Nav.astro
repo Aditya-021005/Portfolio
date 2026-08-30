@@ -3,6 +3,7 @@ import Icon from './Icon.astro';
 import { nav, site } from '../data/site';
 
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isHome = path === '/';
 const isActive = (href: string) => {
   const base = href.split('#')[0].replace(/\/$/, '') || '/';
   return base !== '/' && path.startsWith(base);
@@ -16,7 +17,10 @@ const isActive = (href: string) => {
 >
   <div
     id="nav-surface"
-    class="absolute inset-0 border-b border-white/0 bg-void/0 backdrop-blur-0 transition-all duration-500"
+    class:list={[
+      'absolute inset-0 border-b transition-all duration-500',
+      isHome ? 'border-white/0 bg-void/0 backdrop-blur-0' : 'border-[var(--line)] bg-void/70 backdrop-blur-md',
+    ]}
   >
   </div>
 
@@ -103,13 +107,20 @@ const isActive = (href: string) => {
     const surface = document.getElementById('nav-surface');
     const toggle = document.getElementById('nav-toggle');
     const menu = document.getElementById('mobile-menu');
+    const isHome = window.location.pathname === '/';
 
     const onScroll = () => {
-      const scrolled = window.scrollY > 24;
+      const scrolled = window.scrollY > 18;
       if (!surface) return;
-      surface.classList.toggle('bg-void/72', scrolled);
-      surface.classList.toggle('backdrop-blur-xl', scrolled);
-      surface.classList.toggle('border-[var(--line)]', scrolled);
+
+      surface.classList.toggle('bg-void/70', scrolled || !isHome);
+      surface.classList.toggle('backdrop-blur-md', scrolled || !isHome);
+      surface.classList.toggle('border-[var(--line)]', scrolled || !isHome);
+      surface.classList.toggle('bg-void/0', !scrolled && isHome);
+      surface.classList.toggle('backdrop-blur-0', !scrolled && isHome);
+      surface.classList.toggle('shadow-[0_10px_30px_rgba(0,0,0,0.22)]', scrolled);
+      surface.classList.toggle('shadow-none', !scrolled);
+      surface.classList.toggle('border-white/0', !scrolled && isHome);
     };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });

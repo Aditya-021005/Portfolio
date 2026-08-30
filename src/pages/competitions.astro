@@ -271,57 +271,61 @@ const competitions = [
 
 <script is:inline>
   (() => {
-    const slideshow = document.querySelector('[data-slideshow]');
-    if (!slideshow) return;
+    const slideshows = document.querySelectorAll('[data-slideshow]');
+    if (!slideshows.length) return;
 
-    const slides = Array.from(slideshow.querySelectorAll('[data-slide]'));
-    const dots = Array.from(slideshow.querySelectorAll('[data-slide-dot]'));
-    const caption = slideshow.querySelector('[data-slide-caption]');
-    const current = slideshow.querySelector('[data-slide-current]');
-    let active = 0;
+    slideshows.forEach((slideshow) => {
+      const slides = Array.from(slideshow.querySelectorAll('[data-slide]'));
+      if (!slides.length) return;
 
-    const show = (index) => {
-      active = (index + slides.length) % slides.length;
-      slides.forEach((slide, slideIndex) => slide.classList.toggle('hidden', slideIndex !== active));
-      dots.forEach((dot, dotIndex) => {
-        dot.classList.toggle('bg-cyan-neon', dotIndex === active);
-        dot.classList.toggle('bg-transparent', dotIndex !== active);
-        dot.setAttribute('aria-current', dotIndex === active ? 'true' : 'false');
+      const dots = Array.from(slideshow.querySelectorAll('[data-slide-dot]'));
+      const caption = slideshow.querySelector('[data-slide-caption]');
+      const current = slideshow.querySelector('[data-slide-current]');
+      let active = 0;
+
+      const show = (index) => {
+        active = (index + slides.length) % slides.length;
+        slides.forEach((slide, slideIndex) => slide.classList.toggle('hidden', slideIndex !== active));
+        dots.forEach((dot, dotIndex) => {
+          dot.classList.toggle('bg-cyan-neon', dotIndex === active);
+          dot.classList.toggle('bg-transparent', dotIndex !== active);
+          dot.setAttribute('aria-current', dotIndex === active ? 'true' : 'false');
+        });
+        const activeImage = slides[active]?.querySelector('img');
+        if (caption && activeImage) caption.textContent = activeImage.alt || caption.textContent || 'Competition image';
+        if (current) current.textContent = String(active + 1);
+      };
+
+      slideshow.querySelector('[data-slide-prev]')?.addEventListener('click', () => show(active - 1));
+      slideshow.querySelector('[data-slide-next]')?.addEventListener('click', () => show(active + 1));
+      dots.forEach((dot, dotIndex) => dot.addEventListener('click', () => show(dotIndex)));
+
+      let timer = window.setInterval(() => show(active + 1), 4500);
+      const restart = () => {
+        window.clearInterval(timer);
+        timer = window.setInterval(() => show(active + 1), 4500);
+      };
+      const supportsHover = window.matchMedia('(hover: hover)').matches;
+      if (supportsHover) {
+        slideshow.addEventListener('mouseenter', () => window.clearInterval(timer));
+        slideshow.addEventListener('mouseleave', restart);
+      }
+      slideshow.addEventListener('focusin', () => window.clearInterval(timer));
+      slideshow.addEventListener('focusout', (event) => {
+        if (!slideshow.contains(event.relatedTarget)) restart();
       });
-      const activeImage = slides[active]?.querySelector('img');
-      if (caption && activeImage) caption.textContent = activeImage.alt;
-      if (current) current.textContent = String(active + 1);
-    };
 
-    slideshow.querySelector('[data-slide-prev]')?.addEventListener('click', () => show(active - 1));
-    slideshow.querySelector('[data-slide-next]')?.addEventListener('click', () => show(active + 1));
-    dots.forEach((dot, dotIndex) => dot.addEventListener('click', () => show(dotIndex)));
-
-    let timer = window.setInterval(() => show(active + 1), 4500);
-    const restart = () => {
-      window.clearInterval(timer);
-      timer = window.setInterval(() => show(active + 1), 4500);
-    };
-    const supportsHover = window.matchMedia('(hover: hover)').matches;
-    if (supportsHover) {
-      slideshow.addEventListener('mouseenter', () => window.clearInterval(timer));
-      slideshow.addEventListener('mouseleave', restart);
-    }
-    slideshow.addEventListener('focusin', () => window.clearInterval(timer));
-    slideshow.addEventListener('focusout', (event) => {
-      if (!slideshow.contains(event.relatedTarget)) restart();
+      let touchStartX = 0;
+      slideshow.addEventListener('touchstart', (event) => {
+        touchStartX = event.changedTouches[0]?.clientX ?? 0;
+        window.clearInterval(timer);
+      }, { passive: true });
+      slideshow.addEventListener('touchend', (event) => {
+        const touchEndX = event.changedTouches[0]?.clientX ?? touchStartX;
+        const distance = touchEndX - touchStartX;
+        if (Math.abs(distance) > 45) show(active + (distance < 0 ? 1 : -1));
+        restart();
+      }, { passive: true });
     });
-
-    let touchStartX = 0;
-    slideshow.addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0]?.clientX ?? 0;
-      window.clearInterval(timer);
-    }, { passive: true });
-    slideshow.addEventListener('touchend', (event) => {
-      const touchEndX = event.changedTouches[0]?.clientX ?? touchStartX;
-      const distance = touchEndX - touchStartX;
-      if (Math.abs(distance) > 45) show(active + (distance < 0 ? 1 : -1));
-      restart();
-    }, { passive: true });
   })();
 </script>
