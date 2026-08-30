@@ -24,6 +24,7 @@ const competitions = [
       { src: '/images/robofest-gujarat-5/06.jpg', span: 'wide' as const },
     ],
   },
+
   {
     number: '02',
     title: 'Australian Rover Challenge (ARCh)',
@@ -48,10 +49,9 @@ const competitions = [
       { src: '/images/Arch9.jpeg', span: 'tall' as const },
       { src: '/images/Arch10.mp4', span: 'tall' as const },
       { src: '/images/Arch11.mp4', span: 'tall' as const },
-      
     ],
-    
   },
+
   {
     number: '03',
     title: 'IRC Manipal',
@@ -69,10 +69,10 @@ const competitions = [
       { src: '/images/InRC3.jpg', span: 'normal' as const },
       { src: '/images/InRC4.jpeg', span: 'wide' as const },
       { src: '/images/InRC5.jpg', span: 'normal' as const },
-      { src: '/images/InRC6.jpg', span: 'normal' as const },    
-      
+      { src: '/images/InRC6.jpg', span: 'normal' as const },
     ],
   },
+
   {
     number: '04',
     title: 'International Rover Challenge (IRC) Goa',
@@ -90,10 +90,10 @@ const competitions = [
       { src: '/images/IRC3.jpeg', span: 'normal' as const },
       { src: '/images/IRC4.jpeg', span: 'wide' as const },
       { src: '/images/IRC5.jpeg', span: 'normal' as const },
-      { src: '/images/IRC6.mp4', span: 'tall' as const },    
-      
+      { src: '/images/IRC6.mp4', span: 'tall' as const },
     ],
   },
+
   {
     number: '05',
     title: 'International Rover Design Challenge',
@@ -109,7 +109,6 @@ const competitions = [
     gallery: [
       { src: '/images/IRDC2.jpeg', span: 'wide' as const },
       { src: '/images/IRDC2.jpeg', span: 'wide' as const },
-      
     ],
   },
 ];
@@ -120,9 +119,14 @@ const competitions = [
   description="Robotics competitions and rover development work across autonomous systems, embedded electronics and systems engineering."
 >
   <header class="relative overflow-hidden pb-16 pt-2 sm:pb-24 sm:pt-6">
-    <div class="grid-backdrop pointer-events-none absolute inset-0" aria-hidden="true"></div>
+    <div
+      class="grid-backdrop pointer-events-none absolute inset-0"
+      aria-hidden="true"
+    ></div>
+
     <div class="shell relative">
       <p class="eyebrow anim-fade-up">Competitions</p>
+
       <h1
         class="display anim-fade-up mt-5 max-w-4xl text-[clamp(2.25rem,6.5vw,4.25rem)]"
         style="animation-delay:.08s"
@@ -130,10 +134,14 @@ const competitions = [
         Building for the moment
         <span class="text-gradient">the field gets difficult.</span>
       </h1>
-      <p class="anim-fade-up mt-8 max-w-2xl text-lg leading-relaxed text-fg-muted" style="animation-delay:.16s">
-        Competition environments turn separate engineering disciplines into one question: does the
-        system work when it matters? These projects taught me to design, test and integrate for that
-        question.
+
+      <p
+        class="anim-fade-up mt-8 max-w-2xl text-lg leading-relaxed text-fg-muted"
+        style="animation-delay:.16s"
+      >
+        Competition environments turn separate engineering disciplines into one
+        question: does the system work when it matters? These projects taught me
+        to design, test and integrate for that question.
       </p>
     </div>
   </header>
@@ -153,6 +161,8 @@ const competitions = [
             style={`--reveal-delay:${index * 70}ms`}
           >
             <div class="grid lg:grid-cols-[minmax(15rem,0.7fr)_minmax(0,1.3fr)]">
+
+              <!-- Competition Cover Image -->
               <div
                 class="relative flex aspect-[16/9] min-h-52 items-end overflow-hidden border-b border-[var(--line)] bg-ink p-6 lg:aspect-auto lg:min-h-full lg:border-b-0 lg:border-r"
               >
@@ -167,12 +177,20 @@ const competitions = [
                     />
                   ) : (
                     <>
-                      <div class="grid-backdrop pointer-events-none absolute inset-0 opacity-70" aria-hidden="true"></div>
+                      <div
+                        class="grid-backdrop pointer-events-none absolute inset-0 opacity-70"
+                        aria-hidden="true"
+                      ></div>
+
                       <div class="absolute right-6 top-6 font-mono text-[0.65rem] tracking-[0.2em] text-fg-faint">
                         IMAGE / PLACEHOLDER
                       </div>
+
                       <div class="relative">
-                        <p class="font-mono text-5xl tracking-[-0.06em] text-cyan-soft/80">{competition.number}</p>
+                        <p class="font-mono text-5xl tracking-[-0.06em] text-cyan-soft/80">
+                          {competition.number}
+                        </p>
+
                         <p class="mt-3 max-w-[13rem] text-xs uppercase tracking-[0.16em] text-fg-faint">
                           Replace with competition image
                         </p>
@@ -180,86 +198,180 @@ const competitions = [
                     </>
                   )
                 }
+
                 <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-void/75 via-transparent to-transparent"></div>
+
                 <p class="relative font-mono text-xs tracking-[0.16em] text-white/75"></p>
               </div>
 
+              <!-- Competition Information -->
               <div class="p-6 sm:p-8 lg:p-10">
+
                 <div class="flex flex-wrap items-start justify-between gap-4">
                   <div>
                     <p class="eyebrow">{competition.type}</p>
-                    <h2 class="display mt-3 text-2xl sm:text-3xl">{competition.title}</h2>
+
+                    <h2 class="display mt-3 text-2xl sm:text-3xl">
+                      {competition.title}
+                    </h2>
                   </div>
-                  <span class="font-mono text-xs text-cyan-soft">{competition.year}</span>
+
+                  <span class="font-mono text-xs text-cyan-soft">
+                    {competition.year}
+                  </span>
                 </div>
 
-                <p class="mt-5 text-sm uppercase tracking-[0.1em] text-fg-faint">{competition.disciplines}</p>
+                <p class="mt-5 text-sm uppercase tracking-[0.1em] text-fg-faint">
+                  {competition.disciplines}
+                </p>
 
                 <div class="mt-7 space-y-4 text-sm leading-relaxed text-fg-muted">
-                  {competition.body.map((paragraph) => <p>{paragraph}</p>)}
+                  {competition.body.map((paragraph) => (
+                    <p>{paragraph}</p>
+                  ))}
                 </div>
 
                 <div class="mt-8 flex gap-3 border-t border-[var(--line)] pt-6">
-                  <Icon name="arrowRight" class="mt-0.5 size-4 shrink-0 text-cyan-neon" />
-                  <p class="text-sm leading-relaxed text-fg-muted"><strong class="font-medium text-fg">Focus:</strong> {competition.focus}</p>
+                  <Icon
+                    name="arrowRight"
+                    class="mt-0.5 size-4 shrink-0 text-cyan-neon"
+                  />
+
+                  <p class="text-sm leading-relaxed text-fg-muted">
+                    <strong class="font-medium text-fg">Focus:</strong>{' '}
+                    {competition.focus}
+                  </p>
                 </div>
 
+                <!-- MEDIA SLIDESHOW -->
                 {
-                  competition.gallery && (
-                    <div id="robofest-slideshow" class="mt-8" data-slideshow>
-                      <div class="relative overflow-hidden rounded-[var(--radius-card)] border border-[var(--line)] bg-void touch-pan-y" aria-live="polite">
+                  competition.gallery && competition.gallery.length > 0 && (
+                    <div
+                      class="mt-8"
+                      data-slideshow
+                    >
+                      <div
+                        class="relative overflow-hidden rounded-[var(--radius-card)] border border-[var(--line)] bg-void touch-pan-y"
+                        aria-live="polite"
+                      >
+
                         <div class="aspect-[16/9]">
+
                           {
-                            competition.gallery.map((image, imageIndex) => (
-                              <figure class:list={['relative size-full', imageIndex === 0 ? '' : 'hidden']} data-slide={imageIndex}>
-                                <img
-                                  src={image.src}
-                                  alt={'alt' in image && typeof image.alt === 'string' ? image.alt : `${competition.title} image ${imageIndex + 1}`}
-                                  loading="lazy"
-                                  decoding="async"
-                                  class="size-full object-contain"
-                                />
-                              </figure>
-                            ))
+                            competition.gallery.map((media, mediaIndex) => {
+                              const isVideo =
+                                /\.(mp4|webm|ogg)$/i.test(media.src);
+
+                              return (
+                                <figure
+                                  class:list={[
+                                    'relative size-full',
+                                    mediaIndex === 0 ? '' : 'hidden',
+                                  ]}
+                                  data-slide={mediaIndex}
+                                  data-media-type={isVideo ? 'video' : 'image'}
+                                >
+
+                                  {isVideo ? (
+                                    <video
+                                      src={media.src}
+                                      class="size-full object-contain"
+                                      controls
+                                      playsinline
+                                      preload="metadata"
+                                      aria-label={`${competition.title} video ${mediaIndex + 1}`}
+                                    />
+                                  ) : (
+                                    <img
+                                      src={media.src}
+                                      alt={
+                                        'alt' in media &&
+                                        typeof media.alt === 'string'
+                                          ? media.alt
+                                          : `${competition.title} image ${mediaIndex + 1}`
+                                      }
+                                      loading="lazy"
+                                      decoding="async"
+                                      class="size-full object-contain"
+                                    />
+                                  )}
+
+                                </figure>
+                              );
+                            })
                           }
+
                         </div>
+
+                        <!-- PREVIOUS -->
                         <button
                           type="button"
                           class="absolute left-3 top-1/2 grid size-10 -translate-y-1/2 place-items-center rounded-full border border-[var(--line-strong)] bg-void/75 text-fg backdrop-blur-md transition-colors hover:border-cyan-neon/60"
                           data-slide-prev
-                          aria-label="Previous Robofest image"
+                          aria-label={`Previous ${competition.title} media`}
                         >
                           <Icon name="arrowLeft" class="size-4" />
                         </button>
+
+                        <!-- NEXT -->
                         <button
                           type="button"
                           class="absolute right-3 top-1/2 grid size-10 -translate-y-1/2 place-items-center rounded-full border border-[var(--line-strong)] bg-void/75 text-fg backdrop-blur-md transition-colors hover:border-cyan-neon/60"
                           data-slide-next
-                          aria-label="Next Robofest image"
+                          aria-label={`Next ${competition.title} media`}
                         >
                           <Icon name="arrowRight" class="size-4" />
                         </button>
+
+                        <!-- CAPTION -->
                         <div class="absolute inset-x-0 bottom-0 flex items-center justify-between gap-4 bg-gradient-to-t from-void/90 to-transparent px-4 pb-4 pt-10">
-                          <p class="min-w-0 text-xs text-fg-muted" data-slide-caption>{'caption' in competition.gallery[0] && typeof competition.gallery[0].caption === 'string' ? competition.gallery[0].caption : `${competition.title} gallery`}</p>
-                          <p class="shrink-0 font-mono text-[0.65rem] text-fg-faint"><span data-slide-current>1</span> / {competition.gallery.length}</p>
+
+                          <p
+                            class="min-w-0 text-xs text-fg-muted"
+                            data-slide-caption
+                          >
+                            {`${competition.title} gallery`}
+                          </p>
+
+                          <p class="shrink-0 font-mono text-[0.65rem] text-fg-faint">
+                            <span data-slide-current>1</span>
+                            {' / '}
+                            {competition.gallery.length}
+                          </p>
+
                         </div>
+
                       </div>
-                      <div class="mt-3 flex justify-center gap-2" aria-label="Robofest image slides">
+
+                      <!-- DOTS -->
+                      <div
+                        class="mt-3 flex justify-center gap-2"
+                        aria-label={`${competition.title} media slides`}
+                      >
                         {
-                          competition.gallery.map((_, imageIndex) => (
+                          competition.gallery.map((_, mediaIndex) => (
                             <button
                               type="button"
-                              class:list={['size-2 rounded-full border border-fg-faint transition-colors', imageIndex === 0 ? 'bg-cyan-neon' : 'bg-transparent']}
-                              data-slide-dot={imageIndex}
-                              aria-label={`Show Robofest image ${imageIndex + 1}`}
-                              aria-current={imageIndex === 0 ? 'true' : undefined}
+                              class:list={[
+                                'size-2 rounded-full border border-fg-faint transition-colors',
+                                mediaIndex === 0
+                                  ? 'bg-cyan-neon'
+                                  : 'bg-transparent',
+                              ]}
+                              data-slide-dot={mediaIndex}
+                              aria-label={`Show ${competition.title} media ${mediaIndex + 1}`}
+                              aria-current={
+                                mediaIndex === 0 ? 'true' : undefined
+                              }
                             />
                           ))
                         }
                       </div>
+
                     </div>
                   )
                 }
+
               </div>
             </div>
           </article>
@@ -273,67 +385,317 @@ const competitions = [
   (() => {
     const initSlideshows = () => {
       const slideshows = document.querySelectorAll('[data-slideshow]');
+
       if (!slideshows.length) return;
 
       slideshows.forEach((slideshow) => {
         if (slideshow.dataset.initialized) return;
+
         slideshow.dataset.initialized = 'true';
 
-        const slides = Array.from(slideshow.querySelectorAll('[data-slide]'));
+        const slides = Array.from(
+          slideshow.querySelectorAll('[data-slide]')
+        );
+
         if (!slides.length) return;
 
-        const dots = Array.from(slideshow.querySelectorAll('[data-slide-dot]'));
-        const caption = slideshow.querySelector('[data-slide-caption]');
-        const current = slideshow.querySelector('[data-slide-current]');
+        const dots = Array.from(
+          slideshow.querySelectorAll('[data-slide-dot]')
+        );
+
+        const caption = slideshow.querySelector(
+          '[data-slide-caption]'
+        );
+
+        const current = slideshow.querySelector(
+          '[data-slide-current]'
+        );
+
         let active = 0;
 
-        const show = (index) => {
-          active = (index + slides.length) % slides.length;
-          slides.forEach((slide, slideIndex) => slide.classList.toggle('hidden', slideIndex !== active));
-          dots.forEach((dot, dotIndex) => {
-            dot.classList.toggle('bg-cyan-neon', dotIndex === active);
-            dot.classList.toggle('bg-transparent', dotIndex !== active);
-            dot.setAttribute('aria-current', dotIndex === active ? 'true' : 'false');
+        /*
+         * Stop every video in the slideshow.
+         * This prevents a video from continuing to play
+         * after the user moves to another slide.
+         */
+        const pauseAllVideos = () => {
+          slides.forEach((slide) => {
+            const video = slide.querySelector('video');
+
+            if (video) {
+              video.pause();
+            }
           });
-          const activeImage = slides[active]?.querySelector('img');
-          if (caption && activeImage) caption.textContent = activeImage.alt || caption.textContent || 'Competition image';
-          if (current) current.textContent = String(active + 1);
         };
 
-        slideshow.querySelector('[data-slide-prev]')?.addEventListener('click', () => show(active - 1));
-        slideshow.querySelector('[data-slide-next]')?.addEventListener('click', () => show(active + 1));
-        dots.forEach((dot, dotIndex) => dot.addEventListener('click', () => show(dotIndex)));
+        /*
+         * Update caption based on the active media.
+         */
+        const updateCaption = () => {
+          if (!caption) return;
 
-        let timer = window.setInterval(() => show(active + 1), 4500);
-        const restart = () => {
-          window.clearInterval(timer);
-          timer = window.setInterval(() => show(active + 1), 4500);
+          const activeSlide = slides[active];
+
+          if (!activeSlide) return;
+
+          const image = activeSlide.querySelector('img');
+          const video = activeSlide.querySelector('video');
+
+          if (image) {
+            caption.textContent =
+              image.getAttribute('alt') ||
+              'Competition image';
+          } else if (video) {
+            caption.textContent =
+              `${activeSlide.closest('[data-slideshow]')?.closest('article')?.querySelector('h2')?.textContent?.trim() || 'Competition'} video`;
+          } else {
+            caption.textContent = 'Competition media';
+          }
         };
-        const supportsHover = window.matchMedia('(hover: hover)').matches;
-        if (supportsHover) {
-          slideshow.addEventListener('mouseenter', () => window.clearInterval(timer));
-          slideshow.addEventListener('mouseleave', restart);
-        }
-        slideshow.addEventListener('focusin', () => window.clearInterval(timer));
-        slideshow.addEventListener('focusout', (event) => {
-          if (!slideshow.contains(event.relatedTarget)) restart();
+
+        /*
+         * Show a specific slide.
+         */
+        const show = (index) => {
+          active =
+            (index + slides.length) %
+            slides.length;
+
+          /*
+           * Pause videos before changing slides.
+           */
+          pauseAllVideos();
+
+          /*
+           * Hide all slides except active.
+           */
+          slides.forEach((slide, slideIndex) => {
+            slide.classList.toggle(
+              'hidden',
+              slideIndex !== active
+            );
+          });
+
+          /*
+           * Update navigation dots.
+           */
+          dots.forEach((dot, dotIndex) => {
+            dot.classList.toggle(
+              'bg-cyan-neon',
+              dotIndex === active
+            );
+
+            dot.classList.toggle(
+              'bg-transparent',
+              dotIndex !== active
+            );
+
+            dot.setAttribute(
+              'aria-current',
+              dotIndex === active
+                ? 'true'
+                : 'false'
+            );
+          });
+
+          /*
+           * Update caption.
+           */
+          updateCaption();
+
+          /*
+           * Update slide counter.
+           */
+          if (current) {
+            current.textContent =
+              String(active + 1);
+          }
+        };
+
+        /*
+         * Previous / next buttons.
+         */
+        slideshow
+          .querySelector('[data-slide-prev]')
+          ?.addEventListener('click', () => {
+            show(active - 1);
+          });
+
+        slideshow
+          .querySelector('[data-slide-next]')
+          ?.addEventListener('click', () => {
+            show(active + 1);
+          });
+
+        /*
+         * Dot navigation.
+         */
+        dots.forEach((dot, dotIndex) => {
+          dot.addEventListener('click', () => {
+            show(dotIndex);
+          });
         });
 
-        let touchStartX = 0;
-        slideshow.addEventListener('touchstart', (event) => {
-          touchStartX = event.changedTouches[0]?.clientX ?? 0;
+        /*
+         * Automatically advance slideshow.
+         */
+        let timer = window.setInterval(
+          () => show(active + 1),
+          4500
+        );
+
+        const restart = () => {
           window.clearInterval(timer);
-        }, { passive: true });
-        slideshow.addEventListener('touchend', (event) => {
-          const touchEndX = event.changedTouches[0]?.clientX ?? touchStartX;
-          const distance = touchEndX - touchStartX;
-          if (Math.abs(distance) > 45) show(active + (distance < 0 ? 1 : -1));
-          restart();
-        }, { passive: true });
+
+          timer = window.setInterval(
+            () => show(active + 1),
+            4500
+          );
+        };
+
+        /*
+         * Pause automatic slideshow while hovering.
+         */
+        const supportsHover =
+          window.matchMedia(
+            '(hover: hover)'
+          ).matches;
+
+        if (supportsHover) {
+          slideshow.addEventListener(
+            'mouseenter',
+            () => {
+              window.clearInterval(timer);
+            }
+          );
+
+          slideshow.addEventListener(
+            'mouseleave',
+            restart
+          );
+        }
+
+        /*
+         * Pause automatic slideshow while
+         * keyboard navigating.
+         */
+        slideshow.addEventListener(
+          'focusin',
+          () => {
+            window.clearInterval(timer);
+          }
+        );
+
+        slideshow.addEventListener(
+          'focusout',
+          (event) => {
+            if (
+              !slideshow.contains(
+                event.relatedTarget
+              )
+            ) {
+              restart();
+            }
+          }
+        );
+
+        /*
+         * Touch/swipe support.
+         */
+        let touchStartX = 0;
+
+        slideshow.addEventListener(
+          'touchstart',
+          (event) => {
+            touchStartX =
+              event.changedTouches[0]?.clientX ??
+              0;
+
+            window.clearInterval(timer);
+          },
+          { passive: true }
+        );
+
+        slideshow.addEventListener(
+          'touchend',
+          (event) => {
+            const touchEndX =
+              event.changedTouches[0]?.clientX ??
+              touchStartX;
+
+            const distance =
+              touchEndX - touchStartX;
+
+            if (Math.abs(distance) > 45) {
+              show(
+                active +
+                  (distance < 0 ? 1 : -1)
+              );
+            }
+
+            restart();
+          },
+          { passive: true }
+        );
+
+        /*
+         * If a video starts playing, pause the
+         * automatic slideshow so the user can
+         * watch it without it changing slides.
+         */
+        slides.forEach((slide) => {
+          const video =
+            slide.querySelector('video');
+
+          if (!video) return;
+
+          video.addEventListener(
+            'play',
+            () => {
+              window.clearInterval(timer);
+            }
+          );
+
+          video.addEventListener(
+            'pause',
+            () => {
+              /*
+               * Only restart if this video is
+               * currently active.
+               */
+              if (
+                slides[active] === slide
+              ) {
+                restart();
+              }
+            }
+          );
+
+          video.addEventListener(
+            'ended',
+            () => {
+              /*
+               * Move to next slide after
+               * the video finishes.
+               */
+              show(active + 1);
+              restart();
+            }
+          );
+        });
+
+        /*
+         * Initialize first slide.
+         */
+        show(0);
       });
     };
 
     initSlideshows();
-    document.addEventListener('astro:page-load', initSlideshows);
+
+    document.addEventListener(
+      'astro:page-load',
+      initSlideshows
+    );
   })();
 </script>
