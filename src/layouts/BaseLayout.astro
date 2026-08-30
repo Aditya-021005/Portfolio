@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import { site } from '../data/site';
@@ -56,27 +57,56 @@ const ogImage = new URL(image, Astro.site ?? site.url).toString();
       href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Inter:wght@400;450;500&family=JetBrains+Mono:wght@400&display=swap"
     />
 
+    <ClientRouter />
+
     <script is:inline>
       (() => {
         document.documentElement.classList.remove('no-js');
-
-        const resetScrollTop = () => {
-          if (window.location.hash) return;
-          requestAnimationFrame(() => {
-            window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-          });
-        };
 
         if ('scrollRestoration' in history) {
           history.scrollRestoration = 'manual';
         }
 
-        window.addEventListener('beforeunload', () => window.scrollTo(0, 0));
-        window.addEventListener('load', resetScrollTop, { once: true });
-        window.addEventListener('pageshow', resetScrollTop);
-        document.addEventListener('astro:page-load', resetScrollTop);
-        document.addEventListener('astro:after-swap', resetScrollTop);
-        resetScrollTop();
+        const forceTop = () => {
+          if (window.location.hash) {
+            const el = document.getElementById(window.location.hash.slice(1));
+            if (el) {
+              el.scrollIntoView({ behavior: 'auto' });
+              return;
+            }
+          }
+          window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+          if (document.documentElement) document.documentElement.scrollTop = 0;
+          if (document.body) document.body.scrollTop = 0;
+        };
+
+        const scheduleTop = () => {
+          forceTop();
+          requestAnimationFrame(forceTop);
+          setTimeout(forceTop, 0);
+          setTimeout(forceTop, 60);
+          setTimeout(forceTop, 180);
+        };
+
+        // Intercept cross-page link clicks
+        document.addEventListener('click', (e) => {
+          const a = e.target instanceof Element ? e.target.closest('a') : null;
+          if (!a || !a.href || a.target === '_blank' || a.hasAttribute('download')) return;
+          try {
+            const url = new URL(a.href, window.location.href);
+            if (url.origin === window.location.origin && url.pathname !== window.location.pathname) {
+              window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+            }
+          } catch {}
+        });
+
+        document.addEventListener('astro:before-preparation', scheduleTop);
+        document.addEventListener('astro:before-swap', scheduleTop);
+        document.addEventListener('astro:after-swap', scheduleTop);
+        document.addEventListener('astro:page-load', scheduleTop);
+        window.addEventListener('pageshow', scheduleTop);
+        window.addEventListener('load', scheduleTop);
+        scheduleTop();
       })();
     </script>
     <slot name="head" />
@@ -101,13 +131,14 @@ const ogImage = new URL(image, Astro.site ?? site.url).toString();
     {/* --- Scroll reveal + ambient cursor -------------------------------- */}
     <script is:inline>
       (() => {
-        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const setupReveals = () => {
+          const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          const targets = document.querySelectorAll('[data-reveal]:not(.is-visible)');
+          if (reduce || !('IntersectionObserver' in window)) {
+            targets.forEach((el) => el.classList.add('is-visible'));
+            return;
+          }
 
-        // Reveal on scroll
-        const targets = document.querySelectorAll('[data-reveal]');
-        if (reduce || !('IntersectionObserver' in window)) {
-          targets.forEach((el) => el.classList.add('is-visible'));
-        } else {
           const io = new IntersectionObserver(
             (entries) => {
               entries.forEach((entry) => {
@@ -120,12 +151,15 @@ const ogImage = new URL(image, Astro.site ?? site.url).toString();
             { rootMargin: '0px 0px -12% 0px', threshold: 0.08 }
           );
           targets.forEach((el) => io.observe(el));
-        }
+        };
 
-        // Press ripple — originates at the contact point, sized to cover the
-        // element. Delegated once at the document level so it also applies to
-        // anything rendered later.
-        if (!reduce) {
+        const setupRipples = () => {
+          if (window._hasRippleListener) return;
+          window._hasRippleListener = true;
+
+          const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          if (reduce) return;
+
           const RIPPLE_SELECTOR = '.btn, button, [role="tab"], [data-press]';
 
           document.addEventListener(
@@ -139,7 +173,6 @@ const ogImage = new URL(image, Astro.site ?? site.url).toString();
 
               const x = e.clientX - rect.left;
               const y = e.clientY - rect.top;
-              // Radius reaching the furthest corner from the contact point
               const radius = Math.hypot(
                 Math.max(x, rect.width - x),
                 Math.max(y, rect.height - y)
@@ -156,7 +189,13 @@ const ogImage = new URL(image, Astro.site ?? site.url).toString();
             },
             { passive: true }
           );
-        }
+        };
+
+        setupReveals();
+        setupRipples();
+        document.addEventListener('astro:page-load', () => {
+          setupReveals();
+        });
       })();
     </script>
   </body>

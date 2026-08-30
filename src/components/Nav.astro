@@ -104,45 +104,54 @@ const isActive = (href: string) => {
 
 <script is:inline>
   (() => {
-    const surface = document.getElementById('nav-surface');
-    const toggle = document.getElementById('nav-toggle');
-    const menu = document.getElementById('mobile-menu');
-    const isHome = window.location.pathname === '/';
+    const initNav = () => {
+      const surface = document.getElementById('nav-surface');
+      const toggle = document.getElementById('nav-toggle');
+      const menu = document.getElementById('mobile-menu');
+      const isHome = window.location.pathname === '/';
 
-    const onScroll = () => {
-      const scrolled = window.scrollY > 18;
-      if (!surface) return;
+      const onScroll = () => {
+        const scrolled = window.scrollY > 18;
+        if (!surface) return;
 
-      surface.classList.toggle('bg-void/70', scrolled || !isHome);
-      surface.classList.toggle('backdrop-blur-md', scrolled || !isHome);
-      surface.classList.toggle('border-[var(--line)]', scrolled || !isHome);
-      surface.classList.toggle('bg-void/0', !scrolled && isHome);
-      surface.classList.toggle('backdrop-blur-0', !scrolled && isHome);
-      surface.classList.toggle('shadow-[0_10px_30px_rgba(0,0,0,0.22)]', scrolled);
-      surface.classList.toggle('shadow-none', !scrolled);
-      surface.classList.toggle('border-white/0', !scrolled && isHome);
+        surface.classList.toggle('bg-void/70', scrolled || !isHome);
+        surface.classList.toggle('backdrop-blur-md', scrolled || !isHome);
+        surface.classList.toggle('border-[var(--line)]', scrolled || !isHome);
+        surface.classList.toggle('bg-void/0', !scrolled && isHome);
+        surface.classList.toggle('backdrop-blur-0', !scrolled && isHome);
+        surface.classList.toggle('shadow-[0_10px_30px_rgba(0,0,0,0.22)]', scrolled);
+        surface.classList.toggle('shadow-none', !scrolled);
+        surface.classList.toggle('border-white/0', !scrolled && isHome);
+      };
+      onScroll();
+      window.removeEventListener('scroll', onScroll);
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      let open = false;
+      const setMenu = (next) => {
+        open = next;
+        if (!menu || !toggle) return;
+        menu.classList.toggle('translate-y-[-100%]', !open);
+        menu.classList.toggle('opacity-0', !open);
+        menu.classList.toggle('pointer-events-none', !open);
+        menu.setAttribute('aria-hidden', String(!open));
+        toggle.setAttribute('aria-expanded', String(open));
+        toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        document.body.style.overflow = open ? 'hidden' : '';
+      };
+      setMenu(false);
+
+      toggle?.addEventListener('click', () => setMenu(!open));
+      menu?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setMenu(false)));
+
+      const onKeyDown = (e) => {
+        if (e.key === 'Escape' && open) setMenu(false);
+      };
+      document.removeEventListener('keydown', onKeyDown);
+      document.addEventListener('keydown', onKeyDown);
     };
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
 
-    let open = false;
-    const setMenu = (next) => {
-      open = next;
-      if (!menu || !toggle) return;
-      menu.classList.toggle('translate-y-[-100%]', !open);
-      menu.classList.toggle('opacity-0', !open);
-      menu.classList.toggle('pointer-events-none', !open);
-      menu.setAttribute('aria-hidden', String(!open));
-      toggle.setAttribute('aria-expanded', String(open));
-      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-      document.body.style.overflow = open ? 'hidden' : '';
-    };
-    setMenu(false);
-
-    toggle?.addEventListener('click', () => setMenu(!open));
-    menu?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setMenu(false)));
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && open) setMenu(false);
-    });
+    initNav();
+    document.addEventListener('astro:page-load', initNav);
   })();
 </script>

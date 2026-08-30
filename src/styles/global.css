@@ -53,10 +53,11 @@
   }
 
   html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
     scroll-padding-top: calc(var(--nav-h) + 2rem);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    overflow-anchor: none;
   }
 
   body {
@@ -66,16 +67,22 @@
     font-size: 1rem;
     line-height: 1.6;
     overflow-x: clip;
+    overflow-anchor: none;
   }
 
-  h1, h2, h3, h4 {
+  h1,
+  h2,
+  h3,
+  h4 {
     font-family: var(--font-display);
     font-weight: 500;
     letter-spacing: -0.022em;
     text-wrap: balance;
   }
 
-  p { text-wrap: pretty; }
+  p {
+    text-wrap: pretty;
+  }
 
   ::selection {
     background: var(--color-fg);
@@ -88,14 +95,24 @@
     border-radius: 2px;
   }
 
-  ::-webkit-scrollbar { width: 11px; height: 11px; }
-  ::-webkit-scrollbar-track { background: var(--color-void); }
+  ::-webkit-scrollbar {
+    width: 11px;
+    height: 11px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-void);
+  }
+
   ::-webkit-scrollbar-thumb {
     background: #23282e;
     border-radius: 99px;
     border: 3px solid var(--color-void);
   }
-  ::-webkit-scrollbar-thumb:hover { background: #333a42; }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #333a42;
+  }
 }
 
 /* ==========================================================================
@@ -103,6 +120,7 @@
    ========================================================================== */
 
 @layer components {
+
   /* --- Shell ------------------------------------------------------------ */
   .shell {
     width: 100%;
@@ -110,8 +128,18 @@
     margin-inline: auto;
     padding-inline: 1.25rem;
   }
-  @media (min-width: 640px)  { .shell { padding-inline: 2rem; } }
-  @media (min-width: 1280px) { .shell { padding-inline: 3rem; } }
+
+  @media (min-width: 640px) {
+    .shell {
+      padding-inline: 2rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .shell {
+      padding-inline: 3rem;
+    }
+  }
 
   .shell-narrow {
     width: 100%;
@@ -119,7 +147,12 @@
     margin-inline: auto;
     padding-inline: 1.25rem;
   }
-  @media (min-width: 640px) { .shell-narrow { padding-inline: 2rem; } }
+
+  @media (min-width: 640px) {
+    .shell-narrow {
+      padding-inline: 2rem;
+    }
+  }
 
   /* --- Surfaces ---------------------------------------------------------
      `.glass` is kept as the surface primitive, but it is now a flat panel
@@ -135,6 +168,7 @@
       border-color 0.5s var(--ease-out-expo),
       background-color 0.5s var(--ease-out-expo);
   }
+
   .glass-hover:hover {
     border-color: var(--line-strong);
     background: var(--color-slate-deep);
@@ -152,6 +186,7 @@
     text-transform: uppercase;
     color: var(--color-fg-faint);
   }
+
   .eyebrow::before {
     content: '';
     width: 1.75rem;
@@ -168,14 +203,21 @@
   }
 
   /* Kept for API compatibility — now a quiet tonal shift, not a neon ramp. */
-  .text-gradient { color: var(--color-fg-faint); }
+  .text-gradient {
+    color: var(--color-fg-faint);
+  }
 
   .lede {
     font-size: 1.0625rem;
     line-height: 1.65;
     color: var(--color-fg-muted);
   }
-  @media (min-width: 640px) { .lede { font-size: 1.1875rem; } }
+
+  @media (min-width: 640px) {
+    .lede {
+      font-size: 1.1875rem;
+    }
+  }
 
   /* Monospace metadata label */
   .label {
@@ -217,13 +259,17 @@
     color: var(--color-void);
     font-weight: 500;
   }
-  .btn-primary:hover { background: #ffffff; }
+
+  .btn-primary:hover {
+    background: #ffffff;
+  }
 
   .btn-ghost {
     color: var(--color-fg);
     border-color: var(--line-strong);
     background: transparent;
   }
+
   .btn-ghost:hover {
     border-color: var(--color-fg-muted);
     background: rgb(255 255 255 / 0.04);
@@ -247,6 +293,7 @@
     max-width: 100%;
     overflow-wrap: anywhere;
   }
+
   .chip-accent {
     border-color: color-mix(in oklab, var(--color-cyan-neon) 40%, transparent);
     color: var(--color-cyan-soft);
@@ -263,8 +310,13 @@
   }
 
   /* Retired effects — neutralised so older markup degrades quietly. */
-  .glow { display: none; }
-  .noise::after { content: none; }
+  .glow {
+    display: none;
+  }
+
+  .noise::after {
+    content: none;
+  }
 }
 
 /* ==========================================================================
@@ -279,17 +331,23 @@
     transform 0.65s var(--ease-out-expo);
   transition-delay: var(--reveal-delay, 0ms);
 }
+
 [data-reveal].is-visible {
   opacity: 1;
   transform: none;
 }
-html.no-js [data-reveal] { opacity: 1; transform: none; }
+
+html.no-js [data-reveal] {
+  opacity: 1;
+  transform: none;
+}
 
 /* The accent rule on a section eyebrow draws itself in as the block reveals. */
 .eyebrow::before {
   transform-origin: left center;
   transition: transform 0.85s var(--ease-out-expo) 0.12s;
 }
+
 [data-reveal]:not(.is-visible) .eyebrow::before,
 .eyebrow[data-reveal]:not(.is-visible)::before {
   transform: scaleX(0);
@@ -303,6 +361,7 @@ html.no-js [data-reveal] { opacity: 1; transform: none; }
    -------------------------------------------------------------------------- */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
+
     /* Project media drifts up and settles as the card enters the viewport */
     .scroll-rise {
       animation: scroll-rise linear both;
@@ -325,6 +384,7 @@ html.no-js [data-reveal] { opacity: 1; transform: none; }
     transform: translateY(26px);
     opacity: 0.55;
   }
+
   to {
     transform: none;
     opacity: 1;
@@ -332,8 +392,13 @@ html.no-js [data-reveal] { opacity: 1; transform: none; }
 }
 
 @keyframes rule-wipe {
-  from { transform: scaleX(0); }
-  to   { transform: scaleX(1); }
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
 }
 
 /* ==========================================================================
@@ -341,19 +406,40 @@ html.no-js [data-reveal] { opacity: 1; transform: none; }
    ========================================================================== */
 
 @keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-@keyframes fade-up {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: none; }
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
 }
 
-.anim-marquee { animation: marquee 64s linear infinite; }
-.anim-fade-up { animation: fade-up 0.8s var(--ease-out-expo) both; }
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.anim-marquee {
+  animation: marquee 64s linear infinite;
+}
+
+.anim-fade-up {
+  animation: fade-up 0.8s var(--ease-out-expo) both;
+}
 
 /* Legacy hooks — intentionally inert in the restrained system. */
-.anim-float, .anim-blink { animation: none; }
+.anim-float,
+.anim-blink {
+  animation: none;
+}
 
 /* ==========================================================================
    INTERACTION — press feedback
@@ -368,6 +454,7 @@ html.no-js [data-reveal] { opacity: 1; transform: none; }
    ========================================================================== */
 
 @layer components {
+
   .btn,
   button,
   [role='tab'],
@@ -413,14 +500,23 @@ html.no-js [data-reveal] { opacity: 1; transform: none; }
     transform: translate(-50%, -50%) scale(0);
     animation: ripple 0.62s var(--ease-out-expo) forwards;
   }
-  .btn-primary .ripple { opacity: 0.14; }
+
+  .btn-primary .ripple {
+    opacity: 0.14;
+  }
 
   /* Links that carry an arrow nudge it forward on press as well as hover */
   .nudge :is(svg) {
     transition: transform 0.4s var(--ease-out-expo);
   }
-  .nudge:hover :is(svg) { transform: translateX(3px); }
-  .nudge:active :is(svg) { transform: translateX(6px); }
+
+  .nudge:hover :is(svg) {
+    transform: translateX(3px);
+  }
+
+  .nudge:active :is(svg) {
+    transform: translateX(6px);
+  }
 }
 
 @keyframes ripple {
@@ -431,12 +527,17 @@ html.no-js [data-reveal] { opacity: 1; transform: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ripple { display: none; }
+  .ripple {
+    display: none;
+  }
+
   .btn:active,
   button:active,
   [data-press]:active,
   .press-soft:active,
-  a.glass-hover:active { transform: none; }
+  a.glass-hover:active {
+    transform: none;
+  }
 }
 
 /* ==========================================================================
@@ -448,9 +549,16 @@ html.no-js [data-reveal] { opacity: 1; transform: none; }
   font-size: 1rem;
   line-height: 1.72;
 }
-@media (min-width: 640px) { .prose { font-size: 1.0625rem; } }
 
-.prose > * + * { margin-top: 1.1em; }
+@media (min-width: 640px) {
+  .prose {
+    font-size: 1.0625rem;
+  }
+}
+
+.prose>*+* {
+  margin-top: 1.1em;
+}
 
 .prose h2 {
   margin-top: 3.5rem;
@@ -462,7 +570,12 @@ html.no-js [data-reveal] { opacity: 1; transform: none; }
   color: var(--color-fg);
   scroll-margin-top: calc(var(--nav-h) + 2rem);
 }
-@media (min-width: 640px) { .prose h2 { font-size: 1.5rem; } }
+
+@media (min-width: 640px) {
+  .prose h2 {
+    font-size: 1.5rem;
+  }
+}
 
 .prose h3 {
   margin-top: 2.25rem;
@@ -484,7 +597,10 @@ html.no-js [data-reveal] { opacity: 1; transform: none; }
   color: var(--color-fg-faint);
 }
 
-.prose strong { color: var(--color-fg); font-weight: 550; }
+.prose strong {
+  color: var(--color-fg);
+  font-weight: 550;
+}
 
 .prose a {
   color: var(--color-fg);
@@ -493,15 +609,25 @@ html.no-js [data-reveal] { opacity: 1; transform: none; }
   text-underline-offset: 3px;
   transition: text-decoration-color 0.3s;
 }
-.prose a:hover { text-decoration-color: var(--color-cyan-neon); }
 
-.prose ul, .prose ol { padding-left: 0; list-style: none; }
-.prose ul > li, .prose ol > li {
+.prose a:hover {
+  text-decoration-color: var(--color-cyan-neon);
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 0;
+  list-style: none;
+}
+
+.prose ul>li,
+.prose ol>li {
   position: relative;
   padding-left: 1.4rem;
   margin-top: 0.45rem;
 }
-.prose ul > li::before {
+
+.prose ul>li::before {
   content: '';
   position: absolute;
   left: 0.1rem;
@@ -510,8 +636,12 @@ html.no-js [data-reveal] { opacity: 1; transform: none; }
   height: 1px;
   background: var(--color-cyan-dim);
 }
-.prose ol { counter-reset: li; }
-.prose ol > li::before {
+
+.prose ol {
+  counter-reset: li;
+}
+
+.prose ol>li::before {
   counter-increment: li;
   content: counter(li, decimal-leading-zero);
   position: absolute;
@@ -521,7 +651,10 @@ html.no-js [data-reveal] { opacity: 1; transform: none; }
   font-size: 0.7rem;
   color: var(--color-fg-faint);
 }
-.prose li > ul { margin-top: 0.35rem; }
+
+.prose li>ul {
+  margin-top: 0.35rem;
+}
 
 .prose blockquote {
   margin-block: 1.75rem;
@@ -529,7 +662,10 @@ html.no-js [data-reveal] { opacity: 1; transform: none; }
   border-left: 1px solid var(--color-cyan-dim);
   color: var(--color-fg);
 }
-.prose blockquote p { margin: 0; }
+
+.prose blockquote p {
+  margin: 0;
+}
 
 .prose code {
   font-family: var(--font-mono);
@@ -550,7 +686,13 @@ html.no-js [data-reveal] { opacity: 1; transform: none; }
   font-size: 0.8125rem;
   line-height: 1.7;
 }
-.prose pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
+
+.prose pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+}
 
 .prose hr {
   margin-block: 2.5rem;
@@ -574,12 +716,15 @@ html.no-js [data-reveal] { opacity: 1; transform: none; }
   display: block;
   overflow-x: auto;
 }
-.prose th, .prose td {
+
+.prose th,
+.prose td {
   padding: 0.65rem 0.85rem 0.65rem 0;
   border-bottom: 1px solid var(--line);
   text-align: left;
   vertical-align: top;
 }
+
 .prose th {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
@@ -594,11 +739,20 @@ html.no-js [data-reveal] { opacity: 1; transform: none; }
    ========================================================================== */
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
-  [data-reveal] { opacity: 1 !important; transform: none !important; }
+
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
