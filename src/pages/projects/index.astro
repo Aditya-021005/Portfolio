@@ -5,6 +5,11 @@ import { getProjects, categoriesOf } from '../../lib/projects';
 
 const projects = await getProjects();
 const categories = categoriesOf(projects);
+
+const countOf = (category: string) => {
+  if (category === 'all') return projects.length;
+  return projects.filter((p) => p.data.category === category).length;
+};
 ---
 
 <BaseLayout
@@ -30,35 +35,37 @@ const categories = categoriesOf(projects);
   </header>
 
   <!-- Filter bar -->
-  <div class="sticky z-30 py-3 transition-all duration-500 pointer-events-none" style="top:calc(var(--nav-h) + 0.25rem)">
-    <div class="shell flex justify-center">
+  <div class="sticky z-30 py-2 sm:py-3 transition-all duration-500 pointer-events-none" style="top:calc(var(--nav-h) + 0.25rem)">
+    <div class="shell flex justify-center px-2 sm:px-4">
       <div
         id="project-filters"
-        class="project-filters pointer-events-auto flex items-center gap-1.5 overflow-x-auto rounded-full border border-white/12 bg-[#0c0e11]/85 p-1.5 shadow-[0_12px_36px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-xl transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        class="project-filters pointer-events-auto flex flex-wrap sm:flex-nowrap items-center justify-center gap-1 sm:gap-1.5 rounded-2xl sm:rounded-full border border-white/12 bg-[#0c0e11]/92 p-1.5 sm:p-1.5 shadow-[0_12px_36px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-xl transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)]"
         role="tablist"
         aria-label="Filter projects by category"
       >
         <button
           type="button"
-          class="filter-btn shrink-0 rounded-full px-4 py-2 font-mono text-[0.7rem] uppercase tracking-[0.12em] transition-all duration-300 flex items-center gap-1.5"
+          class="filter-btn rounded-full px-2.5 sm:px-4 py-1 sm:py-2 font-mono text-[0.62rem] sm:text-[0.72rem] uppercase tracking-[0.1em] transition-all duration-300 flex items-center gap-1.5"
           data-filter="all"
           role="tab"
           aria-selected="true"
         >
           <span class="filter-dot size-1.5 rounded-full bg-cyan-neon hidden shadow-[0_0_6px_var(--color-cyan-neon)]"></span>
-          All
+          <span>All</span>
+          <span class="count-badge font-mono text-[0.58rem] sm:text-[0.62rem] opacity-60">({countOf('all')})</span>
         </button>
         {
           categories.map((cat) => (
             <button
               type="button"
-              class="filter-btn shrink-0 rounded-full px-4 py-2 font-mono text-[0.7rem] uppercase tracking-[0.12em] transition-all duration-300 flex items-center gap-1.5"
+              class="filter-btn rounded-full px-2.5 sm:px-4 py-1 sm:py-2 font-mono text-[0.62rem] sm:text-[0.72rem] uppercase tracking-[0.1em] transition-all duration-300 flex items-center gap-1.5"
               data-filter={cat}
               role="tab"
               aria-selected="false"
             >
               <span class="filter-dot size-1.5 rounded-full bg-cyan-neon hidden shadow-[0_0_6px_var(--color-cyan-neon)]"></span>
-              {cat}
+              <span>{cat}</span>
+              <span class="count-badge font-mono text-[0.58rem] sm:text-[0.62rem] opacity-60">({countOf(cat)})</span>
             </button>
           ))
         }
@@ -81,8 +88,9 @@ const categories = categoriesOf(projects);
 <style>
   .project-filters {
     width: fit-content;
-    max-width: calc(100% - 1rem);
-    border-radius: 9999px;
+    max-width: 100%;
+    margin-inline: auto;
+    overflow: visible;
   }
 
   .project-filters--scrolled {
@@ -94,11 +102,11 @@ const categories = categoriesOf(projects);
   .filter-btn {
     color: var(--color-fg-muted);
     border: 1px solid transparent;
+    white-space: nowrap;
   }
   .filter-btn:hover {
     color: var(--color-fg);
     background: rgba(255, 255, 255, 0.05);
-    transform: translateY(-1px);
   }
   .filter-btn[aria-selected='true'] {
     background: color-mix(in oklab, var(--color-cyan-neon) 15%, transparent);
@@ -108,6 +116,10 @@ const categories = categoriesOf(projects);
   }
   .filter-btn[aria-selected='true'] .filter-dot {
     display: inline-block;
+  }
+  .filter-btn[aria-selected='true'] .count-badge {
+    color: var(--color-cyan-soft);
+    opacity: 0.9;
   }
 </style>
 
@@ -140,18 +152,24 @@ const categories = categoriesOf(projects);
         filters.classList.toggle('project-filters--scrolled', window.scrollY > 48);
       };
 
-      const select = (filter) => {
-        buttons.forEach((b) => b.setAttribute('aria-selected', String(b.dataset.filter === filter)));
+      const select = (filter, shouldScroll = true) => {
+        buttons.forEach((b) => {
+          const isSelected = b.dataset.filter === filter;
+          b.setAttribute('aria-selected', String(isSelected));
+          if (isSelected && shouldScroll) {
+            b.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+          }
+        });
         apply(filter);
       };
 
-      buttons.forEach((b) => b.addEventListener('click', () => select(b.dataset.filter)));
+      buttons.forEach((b) => b.addEventListener('click', () => select(b.dataset.filter, true)));
       updateCompactState();
       window.removeEventListener('scroll', updateCompactState);
       window.addEventListener('scroll', updateCompactState, { passive: true });
 
       const initial = new URL(window.location.href).searchParams.get('category');
-      if (initial && buttons.some((b) => b.dataset.filter === initial)) select(initial);
+      if (initial && buttons.some((b) => b.dataset.filter === initial)) select(initial, false);
     };
 
     initFilters();
